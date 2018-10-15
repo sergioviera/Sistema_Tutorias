@@ -72,3 +72,5 @@ Se anexa ejemplo de CRUD y sesiones, se irá revisando avances (4) durante la pr
 - URL Repositorio.
 - En esta ocasión el proyecto se desarrollar bajo el editor en linea Codeanywhere.com en donde deberán compartirme su proyecto, el cual deben ligarlo a su editor haciendo una conexión SSH a su servidor para trabajar 100% en línea, a mi cuenta de correo: systemas@gmail.com
 - URL Server
+
+Link de la activdad en el moodle: http://mariorc.com.mx/elearning/mod/assign/view.php?id=231 
