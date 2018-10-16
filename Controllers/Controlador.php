@@ -10,7 +10,11 @@ class Controlador
     public function cargarPlantilla()
     {
         //Include se utiliza para invocar el arhivo que contiene el codigo HTML
-        include 'Views/plantilla.php';
+        if(isset($_SESSION['iniciada'])){
+            include 'Views/plantilla.php';
+        }else{
+            include 'login.php';
+        }
     }
 
     //Interacción con el usuario

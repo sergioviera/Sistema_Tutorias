@@ -8,7 +8,7 @@ class Modelo
     public function mostrarPagina($enlace){
 
         //Validamos
-        if($enlace == "agregar_alumno" || $enlace == "listado_alumnos"){
+        if($enlace == "agregar_alumno" || $enlace == "listado_alumnos" || $enlace == "dashboard"){
         
             //Mostramos el URL concatenado con la variable $enlacesModel
             $pagina = "Views/Paginas/". $enlace .".php";
