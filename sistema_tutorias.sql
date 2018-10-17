@@ -9,7 +9,7 @@ CREATE TABLE usuarios(
 	nombre varchar(100) NOT NULL,
 	rol varchar(50) NOT NULL,
 	correo varchar(50) NOT NULL,
-	password char(32) NOT NULL
+	contrasena char(32) NOT NULL
 
 );
 
@@ -23,11 +23,10 @@ CREATE TABLE tutores(
 	numero_empleado INT(11) NOT NULL PRIMARY KEY,
 	nombre varchar(100) NOT NULL,
 	carrera INT(11) NOT NULL,
-	email varchar(50) NOT NULL,
-	password char(32) NOT NULL,
+	correo varchar(50) NOT NULL,
+	contrasena char(32) NOT NULL,
 
 	FOREIGN KEY(carrera) REFERENCES carreras(carrera_id)
-
 );
 
 CREATE TABLE alumnos(
@@ -43,20 +42,30 @@ CREATE TABLE alumnos(
 	FOREIGN KEY (tutor_id) REFERENCES tutores(numero_empleado)
 );
 
-CREATE TABLE sesion_tutoria(
-	sesion_id INT(10) NOT NULL,
+CREATE TABLE sesion_tema(
+	tema_id INT(11) PRIMARY KEY,
+	tema_nombre varchar(50) NOT NULL
+);
+
+CREATE TABLE sesiones(
+	sesion_id INT(10) NOT NULL PRIMARY KEY,
 	tutor INT(11) NOT NULL,
 	fecha DATE,
 	hora varchar(10) NOT NULL,
 	tipo varchar(15) NOT NULL,
-	descripcion TEXT,
+	tema INT(11) NOT NULL,
+	observaciones TEXT,
 
-	FOREIGN KEY(tutor) REFERENCES tutores(numero_empleado)
+	FOREIGN KEY(tutor) REFERENCES tutores(numero_empleado),
+	FOREIGN KEY(tema) REFERENCES sesion_tema(tema_id)
 );
 
-CREATE TABLE alumnos_tutoria(
-	sesion_id INT(10),
-	alumno varchar(10),
+CREATE TABLE sesion_alumnos(
+	sesion_id INT(10) NOT NULL,
+	matricula VARCHAR(10) NOT NULL,
 
-	FOREIGN KEY(alumno) REFERENCES alumnos(matricula)
+	PRIMARY KEY(sesion_id, matricula),
+
+	FOREIGN KEY(sesion_id) REFERENCES sesiones(sesion_id),
+	FOREIGN KEY(matricula) REFERENCES alumnos(matricula)
 );

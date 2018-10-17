@@ -5,7 +5,7 @@
 
 //Invocamos el modelo que se utilizará en todos los archivos
 require_once('Modells/Modelo.php');
-//require_once('Modelos/crud.php');
+require_once('Modells/crud.php');
 require_once('Controllers/Controlador.php');
 
 

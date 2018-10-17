@@ -9,12 +9,15 @@ class Controlador
     //Llamar a la plantilla
     public function cargarPlantilla()
     {
+        session_start();
         //Include se utiliza para invocar el arhivo que contiene el codigo HTML
-        if(isset($_SESSION['iniciada'])){
+        
+        if( isset($_SESSION['iniciada']) ){
             include 'Views/plantilla.php';
         }else{
             include 'login.php';
         }
+        
     }
 
     //Interacción con el usuario
@@ -37,6 +40,42 @@ class Controlador
         $pagina = Modelo::mostrarPagina($enlace);
 
         include $pagina;
+    }
+
+    public function iniciarSesion()
+    {
+
+        if( isset($_POST['correo']) && isset( $_POST['contrasena'] ) && isset($_POST['tipoUsuario']) )
+        {
+
+            $datos = array( 'correo'      => $_POST['correo'],
+                            'contrasena'  => $_POST['contrasena'],
+                            'tipoUsuario' => $_POST['tipoUsuario'] );
+            
+            if($datos['tipoUsuario'] == 'Administrador' ){
+                $respuesta = Datos::validarUsuario($datos, 'usuarios');
+            }else{
+                $respuesta = Datos::validarUsuario($datos, 'tutores');
+            }
+           
+            if( $respuesta )
+            {
+                session_start();
+                $_SESSION['iniciada'] = true;
+                $_SESSION['nombre'] = $respuesta['nombre'];
+                //$_SESSION['tipoUsuario'] = $respuesta['tipoUsuario'];
+
+
+                header("location:index.php?action=dashboard");
+                //echo 'Bienvenido al sistema';
+            }else
+            {
+                header("location:index.php");
+                //echo 'Correo o contraseña incorrecto';
+            }
+
+        }
+
     }
 
 }
