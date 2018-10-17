@@ -1,12 +1,12 @@
 <section class="content-header">
     <h1>
-        Agregar Alumno
+        Editar Tutor
         
     </h1>
      <br>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Alumnos </a></li>
-        <li class="active">Agregar Alumno</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Tutores </a></li>
+        <li class="active">Editar Tutor</li>
     </ol>
     <div class="box box-primary">
            
@@ -16,12 +16,12 @@
               <div class="box-body">
 
                 <div class="form-group">
-                  <label for="matricula">Matricula</label>
-                  <input type="text" class="form-control" id="matricula" placeholder="Escribe matricula" name="matricula">
+                  <label for="numero">Numero del empleado</label>
+                  <input type="text" class="form-control" id="numero" placeholder="Escribe numero de empleado" name="numero">
                 </div>
 
                 <div class="form-group">
-                  <label for="nombre">Nombre del alumno</label>
+                  <label for="nombre">Nombre del tutor</label>
                   <input type="text" class="form-control" id="nombre" placeholder="Escribe nombre" nmae="nombre">
                 </div>
 
@@ -36,10 +36,6 @@
                 </select>
               </div>
 
-              <div class="form-group">
-                  <label for="situacion">Situación Academica</label>
-                  <input type="text" class="form-control" id="situacion" placeholder="Escribe situación actual" name="situacion">
-              </div>
 
               <div class="form-group">
                   <label for="correo">Correo</label>
@@ -47,18 +43,13 @@
               </div>
 
               <div class="form-group">
-                <label>Profesor</label>
-                <select class="form-control select2" style="width: 100%;" name=profesor>
-                  <option selected="selected" value="1">ITI</option>
-                  <option value="2">MECA</option>
-                  <option value="3">ISA</option>
-                  <option value="4">PYMES</option>
-                  <option value="5">MANU</option>
-                </select>
+                  <label for="password">Contraseña</label>
+                  <input type="password" class="form-control" id="correo" placeholder="Escribe contraseña" name="password">
               </div>
 
+
                 <div class="form-group">
-                  <label for="foto">Selecciona foto del alumno</label>
+                  <label for="foto">Selecciona foto del tutor</label>
                   <input type="file" id="foto">
                 </div>
 
@@ -69,6 +60,3 @@
               </div>
             </form>
           </div>
-
-</section>
-

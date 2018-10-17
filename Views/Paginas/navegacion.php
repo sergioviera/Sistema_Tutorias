@@ -65,7 +65,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="pages/layout/boxed.html">
+                        <a href="index.php?action=agregar_tutor">
                             <i class="fas fa-plus-square"></i> Agregar 
                         </a>
                     </li>
@@ -88,7 +88,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="pages/layout/boxed.html">
+                    <a href="index.php?action=agregar_carrera">
                             <i class="fas fa-plus-square"></i> Agregar 
                         </a>
                     </li>

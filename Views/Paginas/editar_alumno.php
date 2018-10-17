@@ -1,12 +1,12 @@
 <section class="content-header">
     <h1>
-        Agregar Alumno
+        Editar Alumno
         
     </h1>
      <br>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Alumnos </a></li>
-        <li class="active">Agregar Alumno</li>
+        <li class="active">Editar Alumno</li>
     </ol>
     <div class="box box-primary">
            
@@ -69,6 +69,3 @@
               </div>
             </form>
           </div>
-
-</section>
-

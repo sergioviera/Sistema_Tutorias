@@ -3,7 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>INICIAR SESIÓN</title>
+  <title>Iniciar Sesión</title>
+  
+  <link rel="shortcut icon" href="Public/img/logo.jpg">
+
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -29,16 +32,18 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-  <div class="login-logo">
-    <a href="login.php"><b>SISTEMA DE TUTORIAS</b></a>
-  </div>
+  <!--<div class="login-logo">
+    <a href="login.php"><b>Sistema de Tutorias</b></a>
+  </div>-->
   <!-- /.login-logo -->
   <div class="login-box-body">
+  
   <img class="center-block img-circle" src="Public/img/logo.jpg" width="100px" height="100px">
-    <p class="login-box-msg"><b>INICIO DE SESIÓN<b></p>
+    <p class="login-box-msg " ><b><h3 align="center">Sistema de Tutorias</h3><b></p>
+    <!--<p class="login-box-msg"><b>INICIO DE SESIÓN<b></p>-->
     <form  method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Usuario">
+        <input type="text" class="form-control" placeholder="Usuario">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -48,7 +53,7 @@
       <div class="row">
         <!-- /.col -->
         <div class="col-xs-12">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Iniciar Sesión</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
         </div>
         <!-- /.col -->
       </div>
