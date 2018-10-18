@@ -9,7 +9,7 @@ class Modelo
 
         //Validamos
         if($enlace == "agregar_alumno" || $enlace == "listado_alumnos" || $enlace == "dashboard" || $enlace == "agregar_tutor" || $enlace == "agregar_carrera"
-        || $enlace == "editar_alumno" || $enlace == "editar_tutor" || $enlace == "editar_carrera"){
+        || $enlace == "editar_alumno" || $enlace == "editar_tutor" || $enlace == "editar_carrera" || $enlace=="listado_carrera"){
         
             //Mostramos el URL concatenado con la variable $enlacesModel
             $pagina = "Views/Paginas/". $enlace .".php";

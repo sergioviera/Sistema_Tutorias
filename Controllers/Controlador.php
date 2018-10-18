@@ -75,7 +75,26 @@ class Controlador
             }
 
         }
+        
+    }
 
+    public function agregarCarrera(){
+        if(isset($_POST['nombre'])){
+            $nombre_carrera=$_POST['nombre'];
+            $datos=array('nombre_carrera'=>$nombre_carrera);
+            $respuesta = Datos::agregarCarreraModel($datos, 'carreras');
+        }
+
+    }
+
+    public function obtenerCarreras(){
+        if(isset($_GET["carrera_id"])){
+            $id = $_GET["carrera_id"];//Conseguir el id del usuario a ingresar
+
+            $respuesta = Datos::obtenerDatosCarrera($id, "carreras");//Aqui manda los datos al crud para que haga la funcion de obtenerDatosUsuario
+
+            return $respuesta;//Manda la respuesta
+        }
     }
 
 }

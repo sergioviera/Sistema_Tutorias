@@ -82,7 +82,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a href="pages/layout/top-nav.html">
+                        <a href="index.php?action=listado_carrera">
                             
                             <i class="fas fa-list-ol"></i> Listado 
                         </a>
