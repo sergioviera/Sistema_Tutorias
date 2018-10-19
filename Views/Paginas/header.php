@@ -3,52 +3,28 @@
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT </span>
+      <span class="logo-mini"> <b>UPV</b> </span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"> <img src="Public/img/logo.jpg" height="50px" width="50px" /> </span>
+      <span class="logo-lg"> <img src="Public/img/logo_2.png" height="30px" width="100px" /> </span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
+      
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" >
+        <span> <i class="fas fa-bars"></i> </span>
       </a>
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
 
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="Public/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+          <li class="user-menu">
+            <a href="index.php?action=salir">
+              <span class="hidden-xs"> <i class="fas fa-sign-out-alt"></i>  <strong> Salir </strong> </span>
             </a>
-            <ul class="dropdown-menu">
-
-              <!-- User image -->
-              <li class="user-header">
-                <img src="Public/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                <p>
-                  Alexander Pierce - Web Developer
-                </p>
-              </li>
-              
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Perfil</a>
-                </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Salir</a>
-                </div>
-              </li>
-            
-            </ul>
           </li>
           
-
         </ul>
       </div>
     </nav>

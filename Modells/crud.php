@@ -41,6 +41,42 @@ class Datos extends Conexion{
             return $respuesta;
         }
 
+    /* FUNCION PARA LA ADMINISTRACION DE LOS ALUMNOS */
+
+    //Funcion que envia al controlador todos los datos de la tabla carreras, la cual contiene las carreras de la universdiad
+    public function traerDatosCarreras($tabla){
+
+        //Conexion::conectar() -> es igual a un objeto PDO el cual sirve para conectarse a la base de datos
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+        //Metodo que ejecuta el query previamente preparado
+        $stmt->execute();
+
+        //Se crea un objeto tipo array para recibir los datos
+        $r = array();
+        //se traen todos los datos con la funcion fetchAll
+        $r = $stmt->FetchAll();
+        
+        //Se retornan los datos para el modelo
+        return $r;
+    
+    }
+
+    //Igualita a la funcion para traer carreras solo que esta trae los tutores
+    public function traerDatosTutores($tabla){
+
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+        $stmt->execute();
+
+        $r = array();
+
+        $r = $stmt->FetchAll();
+        
+        return $r;
+    
+    }
+
 }
 
 ?>

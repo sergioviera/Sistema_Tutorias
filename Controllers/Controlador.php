@@ -30,8 +30,12 @@ class Controlador
             //guardar el valor de la variable action en views/modules/navegacion.php en el cual se recibe mediante el metodo get esa variable
             $enlace = $_GET['action'];
         }else{
-            //Si viene vacio inicializo con index
-            $enlace = 'dashboard';
+            //Si viene vacio inicializo con el dashboard dependiendo del tipo de usuario loggeado
+            if($_SESSION['tipoUsuario'] == 'Tutor'){
+                $enlace = 'dashboard_tutor';
+            }else{
+                $enlace = 'dashboard';
+            }
         }
 
         //Mostrar los archivos de los enlaces de cada una de las secciones: inicio, nosotros, etc.
@@ -54,8 +58,10 @@ class Controlador
             
             if($datos['tipoUsuario'] == 'Administrador' ){
                 $respuesta = Datos::validarUsuario($datos, 'usuarios');
+                $tipoUsuario = $respuesta['rol'];
             }else{
                 $respuesta = Datos::validarUsuario($datos, 'tutores');
+                $tipoUsuario = 'Tutor';
             }
            
             if( $respuesta )
@@ -63,13 +69,14 @@ class Controlador
                 session_start();
                 $_SESSION['iniciada'] = true;
                 $_SESSION['nombre'] = $respuesta['nombre'];
-                //$_SESSION['tipoUsuario'] = $respuesta['tipoUsuario'];
+                $_SESSION['tipoUsuario'] = $tipoUsuario;
 
 
                 header("location:index.php?action=dashboard");
                 //echo 'Bienvenido al sistema';
             }else
             {
+                echo '<script> alert("Correo o contraseña incorrectos") </script>';
                 header("location:index.php");
                 //echo 'Correo o contraseña incorrecto';
             }
@@ -96,5 +103,33 @@ class Controlador
             return $respuesta;//Manda la respuesta
         }
     }
+
+    /*** FUNCIONES PARA LA ADMINISTRACION DE LOS ALUMNOS ***/
+
+    //Funcion que retorna a la vista de registro los datos de las carreras disponibles para ponerlos en una lista seleccionable
+    public function obtenerDatosCarreras()
+    {
+
+        $datosDeCarreras = array();
+        
+        //Manda llamar el metodo desde el modelo y pasandole la tabla de donde se van a extraer los datos como parametro
+        $datosDeCarreras = Datos::traerDatosCarreras("carreras");
+
+        return $datosDeCarreras;
+    }
+
+    //Funcion para obtener los datos de los tutores registros, esto debido a que cuando se registra o actualiza el registro de un alumno necesita vincular un tutor, estos datos son desplegados en un lista
+    public function obtenerDatosTutores()
+    {
+
+        $datosDeTutores = array();
+        
+        //Manda llamar una funcion desde el modelo pasandole el nombre de la tabla desde dodne va a traer los datos
+        $datosDeTutores = Datos::traerDatosTutores("tutores");
+
+        return $datosDeTutores;
+    }
+
+    
 
 }

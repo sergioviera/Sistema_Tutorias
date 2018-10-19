@@ -7,12 +7,12 @@
 
 <section class="content-header">
     <h1>
-        Listado Carreras
+        Carreras
     </h1>
      <br>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Carreras </a></li>
-        <li class="active">Listado Carreras</li>
+        <li class="active">Lista de Carreras</li>
     </ol>
     <div class="box box-primary">
     <div class="box">
