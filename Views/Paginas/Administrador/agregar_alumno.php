@@ -1,74 +1,125 @@
+<?php
+//Se instancia a un objeto de l clase controlador para que se manden llamar todos los metodo que cominican a la vista con el controlador
+$controlador = new Controlador();
+
+//Se crean dos arreglos para recibir la informacion de las carreras y los tutores
+$datosCarreras = array();
+$datosTutores = array();
+
+//Se mandan llamar los metodos que traen estos datos, estos retornan un arreglo asociativo, esta informacion sera desplegada en los campos del formulario en donde se necesite mostrar los datos de la tabla que existen
+$datosCarreras = $controlador -> obtenerDatosCarreras();
+$datosTutores = $controlador -> obtenerDatosTutores();
+?>
+
 <section class="content-header">
     <h1>
         Agregar Alumno
-        
     </h1>
-     <br>
+    
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Alumnos </a></li>
         <li class="active">Agregar Alumno</li>
     </ol>
-    <div class="box box-primary">
-           
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+
+<div class="row">
+
+        <div class="col-md-10">
+
+          <!-- general form elements -->
+          <div class="box box-primary">
+
+            <div class="box-header with-border">
+              <h3 class="box-title">Agregue los datos del alumno</h3>
+            </div>
+
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" method='post' enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data">
+              
               <div class="box-body">
 
                 <div class="form-group">
                   <label for="matricula">Matricula</label>
-                  <input type="text" class="form-control" id="matricula" placeholder="Escribe matricula" name="matricula">
+                  <input type="number" class="form-control" name="matricula" placeholder="Ingrese la matricula">
                 </div>
 
                 <div class="form-group">
-                  <label for="nombre">Nombre del alumno</label>
-                  <input type="text" class="form-control" id="nombre" placeholder="Escribe nombre" nmae="nombre">
+                  <label for="nombre">Nombre</label>
+                  <input type="text" class="form-control" name="nombre" placeholder="Nombre completo del alumno">
                 </div>
 
-              <div class="form-group">
-                <label>Carrera</label>
-                <select class="form-control select2" style="width: 100%;" name=carrera>
-                  <option selected="selected" value="1">ITI</option>
-                  <option value="2">MECA</option>
-                  <option value="3">ISA</option>
-                  <option value="4">PYMES</option>
-                  <option value="5">MANU</option>
-                </select>
-              </div>
+                <div class="form-group">    
+                  <label for="carrera">Carrera</label>
+                  <select class="form-control" name="carrera">
+                      <?php
 
-              <div class="form-group">
-                  <label for="situacion">Situación Academica</label>
-                  <input type="text" class="form-control" id="situacion" placeholder="Escribe situación actual" name="situacion">
-              </div>
-
-              <div class="form-group">
-                  <label for="correo">Correo</label>
-                  <input type="email" class="form-control" id="correo" placeholder="Escribe correo institucional" name="correo">
-              </div>
-
-              <div class="form-group">
-                <label>Profesor</label>
-                <select class="form-control select2" style="width: 100%;" name=profesor>
-                  <option selected="selected" value="1">ITI</option>
-                  <option value="2">MECA</option>
-                  <option value="3">ISA</option>
-                  <option value="4">PYMES</option>
-                  <option value="5">MANU</option>
-                </select>
-              </div>
+                          for($i = 0; $i < count($datosCarreras); $i++ ){
+                              echo '<option value="'.$datosCarreras[$i]['carrera_id'].'"> '. $datosCarreras[$i]['nombre'] .' </option>';
+                          }
+                      
+                      ?>
+                  </select>
+                </div>
 
                 <div class="form-group">
-                  <label for="foto">Selecciona foto del alumno</label>
-                  <input type="file" id="foto">
+                    <label for="situacion">Situacion Academica</label>
+                    <select class="form-control" name="situacion">
+                        <option>Regular</option>
+                        <option>Especial</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="correo">Correo</label>
+                    <input type="text" class="form-control" name="correo" placeholder="alguien@ejemplo.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="tutor">Tutor</label>
+                    <select class="form-control" name="tutor">
+                        <?php
+                            for($i = 0; $i < count($datosTutores); $i++ ){
+                                echo '<option value="'.$datosTutores[$i]['tutor_id'].'"> '. $datosTutores[$i]['nombre'] .' </option>';
+                            }
+                        ?>
+                    </select>
+                </div>
+
+                <!--Campo que subre la fotografia al servidor, lo coloca en una carpeta temporal desde donde se toma y se almacena en una carpeta especificada, para poder subir la imagen en el formulario se debe cambiar el encabezado a tipo  enctype="multipart/form-data" -->
+                <div class="form-group">
+                    <label for="foto">Fotografia</label> <br>
+                    <input type="file" class="form-control input-lg" name="foto"  />
                 </div>
 
               </div>
               <!-- /.box-body -->
+
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <center> <input type="submit" class="btn btn-primary input-lg" value="Guardar Datos" /> </center>
               </div>
+              
             </form>
           </div>
+          <!-- /.box -->
+        </div>
+</div>
+<!-- /.row -->
 
 </section>
 
+<?php
+
+//Compara si la variable exista, para que cuando entre sin que se le haya pulsado al boton esto no se accione y trate de hacer algo, eso solo se habilitara cuando el usaurio de click en el boton, es lo que significa
+if(isset($_POST['matricula'])){
+    
+    //Funcion del controlador que permite la lecutra de todas las variables del formulario para reunirlas en un objeto y posteriormente pasarlas al modelo apra que la almacene
+    $Controlador ->  guardarDatosAlumno();
+
+}
+
+?>

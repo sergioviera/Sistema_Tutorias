@@ -1,17 +1,15 @@
 <?php
 
+//Lista de todos los alumnos registrados en la tabla alumnos
 
-//Se instancia a un objeto de l clase controlador para que se manden llamar todos los metodo que cominican a la vista con el controlador
-$Controlador = new Controlador();
+//Se crea un objeto de tipo controlador para poder llamar los metodos para traer toda la informacion
+$controlador = new Controlador();
 
-//Se crean dos arreglos para recibir la informacion de las carreras y los tutores
-$datosCarreras = array();
-$datosTutores = array();
+//Se crea un array que va a recibir todos los obejtos 
+$datosAlumnos = array();
 
-//Se mandan llamar los metodos que traen estos datos, estos retornan un arreglo asociativo, esta informacion sera desplegada en los campos del formulario en donde se necesite mostrar los datos de la tabla que existen
-$datosCarreras = $Controlador -> obtenerDatosCarreras();
-$datosTutores = $Controlador -> obtenerDatosTutores();
-
+//Y se llena ese array con la respuesta con los datos
+$datosAlumnos = $controlador -> obtenerDatosAlumnos();
 
 ?>
 
@@ -31,51 +29,57 @@ $datosTutores = $Controlador -> obtenerDatosTutores();
 <section class="content">
 
 
- <!-- Main row -->
- <div class="row">
+<div class="box box-primary">
 
-        <!-- right col (We are only adding the ID to make the widgets sortable)-->
-        <section class="col-lg-10 connectedSortable">
+<div class="box">
 
-          <!-- Calendar -->
-          <div class="box box-solid bg-green-gradient">
-            <div class="box-header">
-                <i class="fa fa-calendar"></i>
-                <h3 class="box-title">Alumnos</h3>
-                <!-- tools box -->
-                <div class="pull-right box-tools">
+    <div class="box-header">
+    <!--<h3 class="box-title">Data Table With Full Features</h3> -->
+    </div>
 
-                    <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
-                </div>
-                <!-- /. tools -->
-            </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table id="tabla" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <!--Columnas de la cabecera de la tabla-->
+                    <th>Matricula</th>
+                    <th>Nombre</th>
+                    <th>Carrera</th>
+                    <th>Situacion</th>
+                    <th>Correo</th>
+                    <th>Tutor</th>
+                    <th>Foto</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    //La tabla es llenada dinamicamente creando una nueva fila por cada registro en la tabla, toda la ifnormacion que aqui se despliega se trajo desde el controler con el metodo anteriormente definido
+                    for($i=0; $i < count($datosAlumnos); $i++ ){
+                        echo '<tr>';
+                            echo '<td>'. $datosAlumnos[$i]['matricula'] .'</td>';
+                            echo '<td>'. $datosAlumnos[$i]['alumno'] .'</td>';
+                            echo '<td>'. $datosAlumnos[$i]['carrera'] .'</td>';
+                            echo '<td>'. $datosAlumnos[$i]['situacion'] .'</td>';
+                            echo '<td>'. $datosAlumnos[$i]['correo'] .'</td>';
+                            echo '<td>'. $datosAlumnos[$i]['tutor'] .'</td>';
+                            echo '<td>'. $datosAlumnos[$i]['foto'] .'</td>';
+                            //Estos dos de abajo son los botones, se puede observar que estan listos para redirigir el flujo de la app a una pagina que se ellama editar y eliminar, teniendo un parametro el cual es la matricula del alumno a administrar
 
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <!--The calendar -->
-              <div id="calendar" style="width: 100%"></div>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer text-black">
-              <div class="row">
-                <div class="col-sm-6">
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-6">
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-          </div>
-          <!-- /.box -->
+                            echo '<td> <a href="index.php?action=editar_alumno&id='.$datosAlumnos[$i]['matricula'].'" type="button" class="btn btn-warning"> <i class="fas fa-edit"></i> </a> </td>';
+                            
+                            echo '<td>  <a href="index.php?action=eliminar_alumno&id='.$datosAlumnos[$i]['matricula'].'" type="button"  class="btn btn-danger"> <i class="fas fa-trash-alt"></i>  </a> </td>';
+                        echo '</tr>';
+                    }
+                
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-        </section>
-        <!-- right col -->
-      </div>
-      <!-- /.row (main row) -->
-
+    
 
 </section>
-<!-- /.content -->

@@ -28,6 +28,7 @@ throw new Error('AdminLTE requires jQuery')
 +function ($) {
   'use strict';
 
+
   var DataKey = 'lte.boxrefresh';
 
   var Default = {
@@ -1127,4 +1128,8 @@ throw new Error('AdminLTE requires jQuery')
     });
   });
 
+  
+
 }(jQuery);
+
+

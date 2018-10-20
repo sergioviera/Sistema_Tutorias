@@ -15,6 +15,7 @@
         <li class="active">Lista de Carreras</li>
     </ol>
     <div class="box box-primary">
+
     <div class="box">
             <div class="box-header">
               <!--<h3 class="box-title">Data Table With Full Features</h3> -->
@@ -54,4 +55,6 @@
           </div>
           <!-- /.box -->
     </div>
+
+    
 </section>
