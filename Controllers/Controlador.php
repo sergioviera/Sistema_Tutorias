@@ -94,13 +94,32 @@ class Controlador
 
     }
 
-    public function obtenerCarreras(){
+    //Esta función sirve para obtener los datos del id que va ingresar para ver la tabla de los "usuarios" mediante el metodo GET
+    public function obtenerDatosCarreraId(){
         if(isset($_GET["carrera_id"])){
-            $id = $_GET["carrera_id"];//Conseguir el id del usuario a ingresar
+            $carrera_id = $_GET["carrera_id"];//Conseguir el id del usuario a ingresar
 
-            $respuesta = Datos::obtenerDatosCarrera($id, "carreras");//Aqui manda los datos al crud para que haga la funcion de obtenerDatosUsuario
+            $respuesta = Datos::obtenerDatosDeCarreraId($carrera_id, "carreras");//Aqui manda los datos al crud para que haga la funcion de obtenerDatosUsuario
 
             return $respuesta;//Manda la respuesta
+        }
+    }
+
+    public function actualizarDatosCarrera(){
+        if( isset($_POST["nombre"]) ){
+
+            //Un array para conseguir los datos del usuario del archivo editar.php
+            $datosCarrera= array("nombre" => $_POST["nombre"],
+                                     "carrera_id" => $_GET["carrera_id"]);
+            
+            $respuesta = Datos::actualizarDatosCarreras($datosCarrera, "carreras");//Manda los datos al crud para que haga la actualización
+
+            if( $respuesta >= 1 ){
+                header("location:index.php?action=carreras");//Cuando se actualice los datos del usuario lo manda de regreso a la pagina de usuarios.php
+            }else{
+                
+                echo 'No actualizaste datos';//Si no que los actualice sus datos por favor
+            }
         }
     }
 
@@ -117,6 +136,8 @@ class Controlador
 
         return $datosDeCarreras;
     }
+
+
 
     //Funcion para obtener los datos de los tutores registros, esto debido a que cuando se registra o actualiza el registro de un alumno necesita vincular un tutor, estos datos son desplegados en un lista
     public function obtenerDatosTutores()

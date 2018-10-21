@@ -30,16 +30,27 @@ class Datos extends Conexion{
 
     }
 
-    public function obtenerDatosCarrera($id, $tabla){
-        //Esta consulta sirve para obtener los datos del id que va ingresar para ver la tabla de los "usuarios"
-            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE carrera_id = :carrera_id");
-            $stmt->bindParam(":carrera_id", $id , PDO::PARAM_STR);
-            $stmt->execute();
-            $respuesta = array();
-            $respuesta = $stmt->FetchAll();
-            
-            return $respuesta;
-        }
+    //Traer los datos de un usuario en especifico pasandole el id
+    public function obtenerDatosDeCarreraId($carrera_id, $tabla){
+    //Esta consulta sirve para obtener los datos del id que va ingresar para ver la tabla de los "usuarios"
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE carrera_id = :carrera_id");
+        $stmt->bindParam(":carrera_id", $carrera_id , PDO::PARAM_STR);
+        $stmt->execute();
+        $respuesta = array();
+        $respuesta = $stmt->FetchAll();
+        
+        return $respuesta;
+    }
+
+    public function actualizarDatosCarreras($datosModel, $tabla){
+        //Una consulta para actualizar los datos del usuario que quiere editar y pasar los datos a la caja de texto a la pagina editar.php
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre WHERE carrera_id = :carrera_id ");
+        $stmt->bindParam(":nombre", $datosModel["nombre"], PDO::PARAM_STR);
+        $stmt->bindParam(":carrera_id", $datosModel["carrera_id"], PDO::PARAM_INT);
+        $stmt->execute();
+        $actualizar = $stmt->rowCount();
+        return $actualizar;
+    }
 
     /* FUNCION PARA LA ADMINISTRACION DE LOS ALUMNOS */
 

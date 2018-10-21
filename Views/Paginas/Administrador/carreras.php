@@ -1,60 +1,68 @@
 <?php
-    //Array que almacena todos los datos traidos de la tabla
-    $datoCarrera = array();//Hacer array para los datos
-    $datos = new Controlador();//Llamar al controlador
-    $datoCarrera = $datos-> obtenerCarreras();//Obtener los datos del usuario
+  //Se crea un objeto de tipo controlador para poder llamar los metodos para traer toda la informacion
+   $controlador = new Controlador();
+
+  //Se crea un array que va a recibir todos los obejtos 
+  $datosCarrera = array();
+
+  //Y se llena ese array con la respuesta con los datos
+  $datosCarrera = $controlador -> obtenerDatosCarreras();
 ?>
 
 <section class="content-header">
     <h1>
         Carreras
     </h1>
-     <br>
+    
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Carreras </a></li>
-        <li class="active">Lista de Carreras</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Carrera </a></li>
+        <li class="active"> Lista de Carreras </li>
     </ol>
-    <div class="box box-primary">
 
-    <div class="box">
-            <div class="box-header">
-              <!--<h3 class="box-title">Data Table With Full Features</h3> -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Nombre de la Carrera</th>
-                  <th>Editar</th>
-                  <th>Eliminar</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php for($i=0; $i<count($datoCarrera); $i++) { ?>
-                <tr>
-                  <td><?php echo $datoCarrera[$i]['carrera_id'] ?></td>
-                  <td><?php echo $datoCarrera[$i]['nombre'] ?></td>
-                  <td><a href="index.php?action=editar_carrera&id=<?=$datoCarrera[$i]['id']?>"><i class="fas fa-pencil"></i></a></td>
-                  <td><a href="index.php?action=eliminar&id=<?=$datoCarrera[$i]['id']?>"><i class="fas fa-trash-o"></i></a></td>
-                </tr>
-                <?php } ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Id</th>
-                  <th>Nombre de la Carrera</th>
-                  <th>Editar</th>
-                  <th>Eliminar</th>
-                </tr>
-                </tfoot>
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+
+<div class="box box-primary">
+
+<div class="box">
+
+    <div class="box-header">
+    <!--<h3 class="box-title">Data Table With Full Features</h3> -->
     </div>
 
-    
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table id="tabla" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <!--Columnas de la cabecera de la tabla-->
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    //La tabla es llenada dinamicamente creando una nueva fila por cada registro en la tabla, toda la ifnormacion que aqui se despliega se trajo desde el controler con el metodo anteriormente definido
+                    for($i=0; $i < count($datosCarrera); $i++ ){
+                        echo '<tr>';
+                            echo '<td>'. $datosCarrera[$i]['carrera_id'] .'</td>';
+                            echo '<td>'. $datosCarrera[$i]['nombre'] .'</td>';
+                            //Estos dos de abajo son los botones, se puede observar que estan listos para redirigir el flujo de la app a una pagina que se ellama editar y eliminar, teniendo un parametro el cual es la matricula del alumno a administrar
+
+                            echo '<td> <a href="index.php?action=editar_carrera&id='.$datosCarrera[$i]['carrera_id'].'" type="button" class="btn btn-warning"> <i class="fas fa-edit"></i> </a> </td>';
+                            
+                            echo '<td>  <a href="index.php?action=eliminar_carrera&id='.$datosCarrera[$i]['carrera_id'].'" type="button"  class="btn btn-danger"> <i class="fas fa-trash-alt"></i>  </a> </td>';
+                        echo '</tr>';
+                    }
+                
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 </section>
