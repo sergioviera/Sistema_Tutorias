@@ -16,7 +16,7 @@
               <div class="box-body">
 
                 <div class="form-group">
-                  <label for="nombre">Nombre de la carrea</label>
+                  <label for="nombre">Nombre de la carrera</label>
                   <input type="text" class="form-control" id="nombre" placeholder="Escribe nombre de la carrera" name="nombre">
                 </div>
 

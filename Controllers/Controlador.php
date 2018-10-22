@@ -88,6 +88,95 @@ class Controlador
         
     }
 
+    public function agregarUsuario(){
+        if(isset($_POST['nombre'])){
+            $nombre_usuario=$_POST['nombre'];
+            $rol_usuario=$_POST['rol'];
+            $correo_usuario=$_POST['correo'];
+            $contra_usuario=$_POST['contra'];
+            $datos=array('nombre_usuario'=>$nombre_usuario,
+                         'rol_usuario'=>$rol_usuario,
+                         'correo_usuario'=>$correo_usuario,
+                         'contra_usuario'=>$contra_usuario);
+            $respuesta = Datos::agregarUsuarioModel($datos, 'usuarios');
+        }
+
+    }
+
+    public function obtenerDatosUsuarios()
+    {
+
+        $datosDeUsuarios = array();
+        
+        //Manda llamar el metodo desde el modelo y pasandole la tabla de donde se van a extraer los datos como parametro
+        $datosDeUsuarios = Datos::traerDatosUsuarios("usuarios");
+
+        return $datosDeUsuarios;
+    }
+
+    public function obtenerDatosUsuarioId(){
+        $usuario_id = $_GET['id'];
+
+        $datosDeUsuarios = array();
+        
+        //Se manda llamar el metodo del modelo pasandole como parametro la matricula del usuario a traer los datos, de igual forma se hace una union de tablas para obtener la informacion mas entendible, por ello no se pasa el nombre de la tabla como parametro
+        $datosDeUsuarios = Datos::obtenerDatosDeUsuarioId($usuario_id);
+
+        return $datosDeUsuarios;
+    }
+
+    public function editarDatosUser(){
+
+        $usuario_id = $_GET['id'];
+        $nombre_usuario=$_POST['nombre'];
+        $rol_usuario=$_POST['rol'];
+        $correo_usuario=$_POST['correo'];
+        $contra_usuario=$_POST['contra'];
+
+        $datosUsuario=array('usuario_id'=>$usuario_id,
+                         'nombre_usuario'=>$nombre_usuario,
+                         'rol_usuario'=>$rol_usuario,
+                         'correo_usuario'=>$correo_usuario,
+                         'contra_usuario'=>$contra_usuario);
+        
+        
+
+        //Se finaliza de crear los datos, ya con la  foto nueva o en caso de que haya elegido una nueva
+        //Se manda ese objeto con los datos al modelo para que los almacenen en la tabla pasada por parametro aqui abajo
+        $respuesta = Datos::editarDatosUsers($datosUsuario, "usuarios");
+        
+        //El metodo responde con un success o un error y se realiza las notificaciones pertinentes al usuario
+        if($respuesta == "success"){
+            
+            echo '<script> 
+                    alert("Datos guardados correctamente");
+                    window.location.href = "index.php?action=usuarios"; 
+                  </script>';
+            
+        }else{
+            echo '<script> alert("Error al guardar") </script>';
+        }
+
+    }
+
+    public function eliminarUsuario(){
+
+        $usuario_id = $_GET['id'];
+        
+        $respuesta = Datos::eliminarDatosUsuario($usuario_id, "usuarios");
+
+        //Se notifca al usuario como se realizo en los metodos pasados y si se borro exitosamente lo redirecciona a la pagina principal en donde estan listados todos los usuarios
+        if($respuesta == "success"){
+            echo '<script> 
+                    alert("Usuario eliminado");
+                    window.location.href = "index.php?action=usuarios";
+                  </script>';
+        }else{
+            echo '<script> alert("Error al eliminar") </script>';
+        }
+
+    }
+
     public function agregarCarrera(){
         if(isset($_POST['nombre'])){
             $nombre_carrera=$_POST['nombre'];
@@ -97,35 +186,62 @@ class Controlador
 
     }
 
-    //Esta función sirve para obtener los datos del id que va ingresar para ver la tabla de los "usuarios" mediante el metodo GET
     public function obtenerDatosCarreraId(){
-        if(isset($_GET["carrera_id"])){
-            $carrera_id = $_GET["carrera_id"];//Conseguir el id del usuario a ingresar
+        $carrera_id = $_GET['id'];
 
-            $respuesta = Datos::obtenerDatosDeCarreraId($carrera_id, "carreras");//Aqui manda los datos al crud para que haga la funcion de obtenerDatosUsuario
+        $datosDeCarreras = array();
+        
+        //Se manda llamar el metodo del modelo pasandole como parametro la matricula del usuario a traer los datos, de igual forma se hace una union de tablas para obtener la informacion mas entendible, por ello no se pasa el nombre de la tabla como parametro
+        $datosDeCarreras = Datos::obtenerDatosDeCarreraId($carrera_id);
 
-            return $respuesta;//Manda la respuesta
-        }
+        return $datosDeCarreras;
     }
 
-    public function actualizarDatosCarrera(){
-        if( isset($_POST["nombre"]) ){
+    public function editarDatosCarrera(){
 
-            //Un array para conseguir los datos del usuario del archivo editar.php
-            $datosCarrera= array("nombre" => $_POST["nombre"],
-                                     "carrera_id" => $_GET["carrera_id"]);
+        $carrera_id = $_GET['id'];
+        $nombre = $_POST['nombre'];
+        
+        
+
+        //Se finaliza de crear los datos, ya con la  foto nueva o en caso de que haya elegido una nueva
+        $datosCarrera = array('carrera_id' => $carrera_id,
+                            'nombre' => $nombre);
+        
+        //Se manda ese objeto con los datos al modelo para que los almacenen en la tabla pasada por parametro aqui abajo
+        $respuesta = Datos::editarDatosCarrera($datosCarrera, "carreras");
+        
+        //El metodo responde con un success o un error y se realiza las notificaciones pertinentes al usuario
+        if($respuesta == "success"){
             
-            $respuesta = Datos::actualizarDatosCarreras($datosCarrera, "carreras");//Manda los datos al crud para que haga la actualización
-
-            if( $respuesta >= 1 ){
-                header("location:index.php?action=carreras");//Cuando se actualice los datos del usuario lo manda de regreso a la pagina de usuarios.php
-            }else{
-                
-                echo 'No actualizaste datos';//Si no que los actualice sus datos por favor
-            }
+            echo '<script> 
+                    alert("Datos guardados correctamente");
+                    window.location.href = "index.php?action=carreras"; 
+                  </script>';
+            
+        }else{
+            echo '<script> alert("Error al guardar") </script>';
         }
+
     }
 
+    public function eliminarCarrera(){
+
+        $carrera_id = $_GET['id'];
+        
+        $respuesta = Datos::eliminarDatosCarrera($carrera_id, "carreras");
+
+        //Se notifca al usuario como se realizo en los metodos pasados y si se borro exitosamente lo redirecciona a la pagina principal en donde estan listados todos los usuarios
+        if($respuesta == "success"){
+            echo '<script> 
+                    alert("Carrera eliminada");
+                    window.location.href = "index.php?action=carreras";
+                  </script>';
+        }else{
+            echo '<script> alert("Error al eliminar") </script>';
+        }
+
+    }
     /*** FUNCIONES PARA LA ADMINISTRACION DE LOS ALUMNOS ***/
 
     //Funcion que retorna a la vista de registro los datos de las carreras disponibles para ponerlos en una lista seleccionable

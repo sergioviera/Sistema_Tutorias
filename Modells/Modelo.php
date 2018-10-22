@@ -19,6 +19,7 @@ class Modelo
                 $enlace == "carreras" ||
                 $enlace == "dashboard" ||                 
                 $enlace == "editar_alumno" ||
+                $enlace == "editar_usuario" ||
                 $enlace == "editar_carrera" ||
                 $enlace == "editar_tutor" || 
                 $enlace == "editar_tema" ||

@@ -56,7 +56,7 @@
 
                             echo '<td> <a href="index.php?action=editar_carrera&id='.$datosCarrera[$i]['carrera_id'].'" type="button" class="btn btn-warning"> <i class="fas fa-edit"></i> </a> </td>';
                             
-                            echo '<td>  <a href="index.php?action=eliminar_carrera&id='.$datosCarrera[$i]['carrera_id'].'" type="button"  class="btn btn-danger"> <i class="fas fa-trash-alt"></i>  </a> </td>';
+                            echo '<td>  <a href="index.php?action=carreras&accion=eliminar_carrera&id='.$datosCarrera[$i]['carrera_id'].'" type="button"  class="btn btn-danger"> <i class="fas fa-trash-alt"></i>  </a> </td>';
                         echo '</tr>';
                     }
                 
@@ -66,3 +66,14 @@
     </div>
 </div>
 </section>
+
+<?php
+
+//Valida que se accion el metodo solo si se hace clic en el boton y no cuando se cargue pagina
+if(isset($_GET['accion'])) {
+    if( $_GET['accion'] == "eliminar_carrera"){
+        $controlador -> eliminarCarrera();
+    }
+}
+
+?>

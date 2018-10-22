@@ -22,6 +22,104 @@ class Datos extends Conexion{
 
     }
 
+    public function agregarUsuarioModel($datosModel, $tabla){
+        //Llama la conexión y hace la inserción de los datos y cada stmt para llenar los datos a la tabla usuarios
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre,rol,correo,contrasena) VALUES(:nombre,:rol,:correo,md5(:contrasena)) ");
+        
+        $stmt->bindParam(":nombre", $datosModel["nombre_usuario"] , PDO::PARAM_STR);
+        $stmt->bindParam(":rol", $datosModel["rol_usuario"] , PDO::PARAM_STR);
+        $stmt->bindParam(":correo", $datosModel["correo_usuario"] , PDO::PARAM_STR);
+        $stmt->bindParam(":contrasena", $datosModel["contra_usuario"] , PDO::PARAM_STR);
+        
+        return $stmt->execute();
+
+    }
+
+    public function obtenerDatosDeUsuarioId($usuario_id){
+
+        //Se prepara el query
+       $stmt = Conexion::conectar()->prepare("SELECT * FROM usuarios WHERE usuario_id = :usuario_id");
+
+        //Se pasan los parametros de ese query
+        $stmt->bindParam(":usuario_id", $usuario_id , PDO::PARAM_STR);
+
+        //se ejecuta
+        $stmt->execute();
+
+        $r = array();
+
+        //Se trane todos los ddatos
+        $r = $stmt->FetchAll();
+        
+        //y finalmente se pasan al controlador para ponerlos en la vista en donde se hace la edicion de dicho registro
+        return $r;
+
+    }
+
+    public function editarDatosUsers($datosUsuario, $tabla){
+
+        //Se prepara el query con el comando UPDATE -> DE EDITAR, O ACTUALIZAR
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla 
+                                               SET nombre = :nombre,
+                                               rol = :rol,
+                                               correo = :correo,
+                                               contrasena=md5(:contrasena)
+                                               WHERE usuario_id = :usuario_id ");
+        
+        //Se relacionan todos los parametros con los pasados en el arreglo asociativo desde el controlador
+        $stmt->bindParam(":nombre", $datosUsuario["nombre"], PDO::PARAM_STR);
+        $stmt->bindParam(":rol", $datosUsuario["rol"], PDO::PARAM_STR);
+        $stmt->bindParam(":correo", $datosUsuario["correo"], PDO::PARAM_STR);
+        $stmt->bindParam(":contrasena", $datosUsuario["contrasena"], PDO::PARAM_STR);
+        $stmt->bindParam(":usuario_id", $datosUsuario["usuario_id"] , PDO::PARAM_INT);
+        
+        print_r($datosUsuario);
+
+        //Y son ejecutados y notificados al controlador para que este les notifique a las vistas para que den un mensaje amigable al usuario
+        if($stmt->execute()){
+            return "success";
+        }else{
+            return "error";
+        }
+
+        $stmt->close();
+
+
+    }
+
+    public function traerDatosUsuarios($tabla){
+
+        //Conexion::conectar() -> es igual a un objeto PDO el cual sirve para conectarse a la base de datos
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+        //Metodo que ejecuta el query previamente preparado
+        $stmt->execute();
+
+        //Se crea un objeto tipo array para recibir los datos
+        $r = array();
+        //se traen todos los datos con la funcion fetchAll
+        $r = $stmt->FetchAll();
+        
+        //Se retornan los datos para el modelo
+        return $r;
+    
+    }
+
+    public function eliminarDatosUsuario($usuario_id, $tabla){
+
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE usuario_id = :usuario_id ");
+
+        $stmt->bindParam(":usuario_id", $usuario_id , PDO::PARAM_INT);
+
+        //Le informa al controlador si se realizao con exito o no dicha transaccion
+        if($stmt->execute() ){
+            return "success";
+        }else{
+            return "error";
+        }
+
+    }
+
     public function agregarCarreraModel($datosModel, $tabla){
         //Llama la conexión y hace la inserción de los datos y cada stmt para llenar los datos a la tabla usuarios
         $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre) VALUES(:nombre) ");
@@ -32,26 +130,65 @@ class Datos extends Conexion{
 
     }
 
-    //Traer los datos de un usuario en especifico pasandole el id
-    public function obtenerDatosDeCarreraId($carrera_id, $tabla){
-    //Esta consulta sirve para obtener los datos del id que va ingresar para ver la tabla de los "usuarios"
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE carrera_id = :carrera_id");
+    public function obtenerDatosDeCarreraId($carrera_id){
+
+        //Se prepara el query
+       $stmt = Conexion::conectar()->prepare("SELECT * FROM carreras WHERE carrera_id = :carrera_id");
+
+        //Se pasan los parametros de ese query
         $stmt->bindParam(":carrera_id", $carrera_id , PDO::PARAM_STR);
+
+        //se ejecuta
         $stmt->execute();
-        $respuesta = array();
-        $respuesta = $stmt->FetchAll();
+
+        $r = array();
+
+        //Se trane todos los ddatos
+        $r = $stmt->FetchAll();
         
-        return $respuesta;
+        //y finalmente se pasan al controlador para ponerlos en la vista en donde se hace la edicion de dicho registro
+        return $r;
+
     }
 
-    public function actualizarDatosCarreras($datosModel, $tabla){
-        //Una consulta para actualizar los datos del usuario que quiere editar y pasar los datos a la caja de texto a la pagina editar.php
-        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre WHERE carrera_id = :carrera_id ");
-        $stmt->bindParam(":nombre", $datosModel["nombre"], PDO::PARAM_STR);
-        $stmt->bindParam(":carrera_id", $datosModel["carrera_id"], PDO::PARAM_INT);
-        $stmt->execute();
-        $actualizar = $stmt->rowCount();
-        return $actualizar;
+    public function editarDatosCarrera($datosCarrera, $tabla){
+
+        //Se prepara el query con el comando UPDATE -> DE EDITAR, O ACTUALIZAR
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla 
+                                               SET nombre = :nombre
+                                               WHERE carrera_id = :carrera_id ");
+        
+        //Se relacionan todos los parametros con los pasados en el arreglo asociativo desde el controlador
+        $stmt->bindParam(":nombre", $datosCarrera["nombre"], PDO::PARAM_STR);
+        $stmt->bindParam(":carrera_id", $datosCarrera["carrera_id"] , PDO::PARAM_INT);
+        
+        print_r($datosCarrera);
+
+        //Y son ejecutados y notificados al controlador para que este les notifique a las vistas para que den un mensaje amigable al usuario
+        if($stmt->execute()){
+            return "success";
+        }else{
+            return "error";
+        }
+
+        $stmt->close();
+
+
+    }
+
+     public function eliminarDatosCarrera($carrera_id, $tabla){
+
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE carrera_id = :carrera_id ");
+
+        $stmt->bindParam(":carrera_id", $carrera_id , PDO::PARAM_INT);
+
+        //Le informa al controlador si se realizao con exito o no dicha transaccion
+        if($stmt->execute() ){
+            return "success";
+        }else{
+            return "error";
+        }
+
     }
 
     /* FUNCION PARA LA ADMINISTRACION DE LOS ALUMNOS */
