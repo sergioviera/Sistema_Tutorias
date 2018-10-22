@@ -43,12 +43,12 @@ CREATE TABLE alumnos(
 );
 
 CREATE TABLE sesion_tema(
-	tema_id INT(11) PRIMARY KEY,
+	tema_id INT(11) PRIMARY KEY AUTO_INCREMENT,
 	tema_nombre varchar(50) NOT NULL
 );
 
 CREATE TABLE sesiones(
-	sesion_id INT(10) NOT NULL PRIMARY KEY,
+	sesion_id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	tutor INT(11) NOT NULL,
 	fecha DATE,
 	hora varchar(10) NOT NULL,

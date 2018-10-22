@@ -86,12 +86,6 @@
                     </li>
 
                     <li>
-                        <a href="index.php?action=reportes_fecha">
-                            <i class="fas fa-calendar-alt"></i> Por fechas 
-                        </a>
-                    </li>
-
-                    <li>
                         <a href="index.php?action=reportes_tutoria">
                             <i class="fas fa-hands-helping"></i> Por tutoria 
                         </a>

@@ -59,9 +59,11 @@ class Controlador
             if($datos['tipoUsuario'] == 'Administrador' ){
                 $respuesta = Datos::validarUsuario($datos, 'usuarios');
                 $tipoUsuario = $respuesta['rol'];
+                $idUsuario = $respuesta['usuario_id'];
             }else{
                 $respuesta = Datos::validarUsuario($datos, 'tutores');
                 $tipoUsuario = 'Tutor';
+                $idUsuario = $respuesta['numero_empleado'];
             }
            
             if( $respuesta )
@@ -70,6 +72,7 @@ class Controlador
                 $_SESSION['iniciada'] = true;
                 $_SESSION['nombre'] = $respuesta['nombre'];
                 $_SESSION['tipoUsuario'] = $tipoUsuario;
+                $_SESSION['idUsuario'] = $idUsuario;
 
 
                 header("location:index.php?action=dashboard");
@@ -163,6 +166,19 @@ class Controlador
         return $datosDeAlumnos;
     }
 
+    //Funcion que trae los datos de UN solo alumno, esto con el fin de actualizarlo en la vista editar_alumno, para saber que usario se va a editar se manda un parametro GET llamado id en el cual va el id del usuario que en este caso es la matricula
+    public function obtenerDatosAlumno(){
+
+        $matriculaAlumno = $_GET['id'];
+
+        $datosDeAlumnos = array();
+        
+        //Se manda llamar el metodo del modelo pasandole como parametro la matricula del usuario a traer los datos, de igual forma se hace una union de tablas para obtener la informacion mas entendible, por ello no se pasa el nombre de la tabla como parametro
+        $datosDeAlumnos = Datos::traerDatosAlumno($matriculaAlumno);
+
+        return $datosDeAlumnos;
+    }
+
     //Funcion que se manda llamar al registrar un usuario nuevo a la aplicacion, todos los datos son enviados a traves de un formulario el cual esta funcion cacha con los parametros POST identificandolos con el respectivo nombre de campo de la vista agregar_alumno.php
     public function guardarDatosAlumno(){
         
@@ -206,17 +222,307 @@ class Controlador
 
             //Se recibe la respuesta del metodo y si esta es exitosa se manda un mensaje de notificacion al cliente y se reenvia al usuario a la lista de todos los usuarios para que vea la insercion del nuevo alumno.
             if($respuesta == "success"){
-                /*echo '<script> 
+                echo '<script> 
                             alert("Datos guardados correctamente");
                             window.location.href = "index.php?action=alumnos"; 
-                      </script>';*/
-                header('index.php?action=alumnos');
+                      </script>';
+                //header('index.php?action=alumnos');
             }else{
                 //En caso de haber un error se queda en la misma pagina y le notifica al ususario
                 echo '<script> alert("Error al guardar") </script>';
             }
         }
     }
+
+    //Funcion que permite editar los datos de un alumno pasandole los datos por medio de un formualrio, esta funcion es muy parecida a la de arriba a diferencia que manda a otra funcion al modelo la cual sirve para actualizar los datos de un respectivo alumno
+    public function editarDatosAlumno(){
+
+        $matricula = $_GET['id'];
+        $nombre = $_POST['nombre'];
+        $carrera = $_POST['carrera'];
+        $situacion = $_POST['situacion'];
+        $correo = $_POST['correo'];
+        $tutor = $_POST['tutor'];
+        //$foto = $_POST['fotoActual'];
+        
+        $nombreArchivo = basename($_FILES['foto']['name']);
+        
+        $directorio = 'fotos/' . $nombreArchivo;
+
+        $extension = pathinfo($directorio , PATHINFO_EXTENSION);
+        
+
+        //Tambien se compara si el usuario solo quiere actualizar los datos o tambien la foto de perfil, en caso de que solo quiera editar los datos y quiera conservar la foto entra en el if de acontinuacion para almacenar el nombre de la misma foto que tenia previamente
+        if($nombreArchivo == "" ){
+            $foto = $_POST['fotoActual'];
+        }else{
+            
+            if($extension != 'png' && $extension != 'jpg' && $extension != 'PNG' && $extension != 'JPG'){
+                echo '<script> alert("Error al subir el archivo intenta con otro") </sript>';
+                
+                $foto = $_POST['fotoActual'];
+
+            }else{
+
+                //En caso de que el usuario haya querido ademas de actualizar sus datos en tipo texto, tambien editar la foto, entra aesta parte del if en donde crea una nueva foto, o sobreescibe la existente y la almacena en la variable foto la cual sera almacenada con los datos realizado.
+
+                move_uploaded_file($_FILES['foto']['tmp_name'], 'fotos/'.$matricula . '.' . $extension);
+
+                $foto = $matricula . '.' . $extension;
+
+            }
+        }
+
+        //Se finaliza de crear los datos, ya con la  foto nueva o en caso de que haya elegido una nueva
+        $datosAlumno = array('matricula' => $matricula,
+                            'nombre' => $nombre,
+                            'carrera' => $carrera,
+                            'situacion' => $situacion,
+                            'correo' => $correo,
+                            'tutor' => $tutor,
+                            'foto' => $foto );
+        
+        //Se manda ese objeto con los datos al modelo para que los almacenen en la tabla pasada por parametro aqui abajo
+        $respuesta = Datos::editarDatosUsuario($datosAlumno, "alumnos");
+        
+        //El metodo responde con un success o un error y se realiza las notificaciones pertinentes al usuario
+        if($respuesta == "success"){
+            
+            echo '<script> 
+                    alert("Datos guardados correctamente");
+                    window.location.href = "index.php?action=alumnos"; 
+                  </script>';
+            
+        }else{
+            echo '<script> alert("Error al guardar") </script>';
+        }
+
+    }
+
+    //Funcion que sirve para eliminar los datos de un alumno de la tabla, para saber que alumno eliminar se pasa como parametro GET la matricula del alumno, y posterioremte se pasa como parametro junto con el nombre de la tabla para que el modelo haga el resto
+    public function eliminarAlumno(){
+
+        $matriculaAlumno = $_GET['id'];
+        
+        $respuesta = Datos::eliminarDatosAlumno($matriculaAlumno, "alumnos");
+
+        //Se notifca al usuario como se realizo en los metodos pasados y si se borro exitosamente lo redirecciona a la pagina principal en donde estan listados todos los usuarios
+        if($respuesta == "success"){
+            echo '<script> 
+                    alert("Alumno eliminado");
+                    window.location.href = "index.php?action=alumnos";
+                  </script>';
+        }else{
+            echo '<script> alert("Error al eliminar") </script>';
+        }
+
+    }
+
+    //Funcion que obtiene los datos de una vista del archivo agregar_tema.php y los manda al archivo del modelo que realiza las operaciones con los datos, lo que le pasa al modelo para almacenar es el nuevo tema de tutorias, solo eso pues el id que es el otro campo de la tabla es autoincrementable y no es neceario pasarselo explicitamente
+    public function guardarDatosTema(){
+        $nuevoTema = $_POST['tema'];
+
+        $respuesta = Datos::guardarDatosTema($nuevoTema);
+
+        //Se notifca al usuario como se realizo en los metodos pasados y si se borro exitosamente lo redirecciona a la pagina principal en donde estan listados todos los usuarios
+        if($respuesta == "success"){
+            echo '<script> 
+                    alert("Tema insertado correctamente");
+                    window.location.href = "index.php?action=temas";
+                  </script>';
+        }else{
+            echo '<script> alert("Error al guardar") </script>';
+        }
+
+    }
+
+    //Funcion que obitene todos los datos de los temas almacenados en su respectiva tabla, estso son TODOS los registros
+    public function obtenerDatosTemas(){
+
+        $datosDeTemas = array();
+        
+        $datosDeTemas = Datos::traerDatosTemas();
+
+        return $datosDeTemas;
+
+    }
+
+    //Funcion que obitene solo uno los datos de los temas almacenados en su respectiva tabla, es unicamente un dato de los registros, el cual se escpecifica pasandole el id de dicho tema por parametro a la funcion del modelo que recupera los datos de la base de datos
+    public function obtenerDatosTema(){
+
+        $idTema = $_GET['id'];
+
+        $datosDeTema = array();
+
+        $datosDeTema = Datos::traerDatosTema($idTema);
+
+        return $datosDeTema;
+
+    }
+
+
+    //Funcion que elimina un dato de la tabla de los temas que se tratan en las tutorias, el registro a eliminar se especifica pasandole el id al metodo de la parte del modleo que interactua con los datos, asi como se pasa el nombre de la tabla a la que se refiere
+    public function eliminarTema(){
+
+        $tema = $_GET['id'];
+        
+        $respuesta = Datos::eliminarDatosTema($tema, "sesion_tema");
+
+        //Se notifca al usuario como se realizo en los metodos pasados y si se borro exitosamente lo redirecciona a la pagina principal en donde estan listados todos los usuarios
+        if($respuesta == "success"){
+            echo '<script> 
+                    alert("Tema eliminado correctamente");
+                    window.location.href = "index.php?action=temas";
+                  </script>';
+        }else{
+            echo '<script> alert("Error al eliminar") </script>';
+        }
+
+
+    }
+
+    //Funcion que edita los datos de un registro existente en la tabla de los temas de las tutorias (tema_sesion), para saber que dato se va a eliminar y que nueva informacion se le va a añadir se le manda esta informacion al modelo a traves  de un objeto el cual dicha informacion porviene de la vista en donde esta el formulario en donde el usuario puede editar esta informacion
+    public function editarDatosTema(){
+
+        $datosTema = array( 'id'   => $_GET['id'],
+                            'tema' => $_POST['tema'] );
+
+        
+        $respuesta = Datos::editarDatosTema($datosTema, "sesion_tema");
+
+        if($respuesta == "success"){
+            echo '<script> 
+                    alert("Tema editado correctamente");
+                    window.location.href = "index.php?action=temas";
+                  </script>';
+        }else{
+            echo '<script> alert("Error al editar") </script>';
+        }
+
+    }
+
+
+    //Funcion que trae todos los alumnos en la tabla asociados a un tutor en especifico, sacando el id del tutor de la sesion en donde se le asigno al momento en que el tutor inicia sesion
+    public function obtenerDatosAlumnosPorProfe(){
+
+        $datosDeAlumnos = array();
+        $idTutor = $_SESSION['idUsuario'];
+        
+        //Esta funcion del modelo no pide la tabla ya que se trata de una union de todas las tres tablas existentes para traer todos los datos completos y entendibles
+        $datosDeAlumnos = Datos::traerDatosAlumnosPorProfe($idTutor);
+
+        return $datosDeAlumnos;
+
+    }
     
+
+    /* FUNCIONES PARA ADMINSITRAR LOS DATOS DE LAS TUTORIAS */
+
+    public function guardarDatosTutoria(){
+
+        $alumnos = array();
+
+        // Recorre la lista de los checks para saber cuales estan selecionados
+        foreach($_POST['check_list'] as $selected){
+            array_push($alumnos, $selected);
+        }
+        
+        $datosTutoria = array('tutor' => $_SESSION['idUsuario'],
+                              'fecha' => $_POST['fecha'],
+                              'hora' => $_POST['hora'],
+                              'tipo' => $_POST['tipo'],
+                              'tema' => $_POST['tema'],
+                              'observaciones' => $_POST['observaciones']);
+
+        
+        //PDO::lastInsertId();
+        //echo 'Datos alumnos: ';
+        //print_r($alumnos);
+        
+
+        $resultado = Datos::guardarDatosTutoria($datosTutoria);
+
+        if($resultado != 0 ){
+            
+            for($i = 0; $i < count($alumnos); $i++ ){
+                Datos::guardarAlumnosSesiones($resultado, $alumnos[$i]);
+            }
+
+            echo '<script> 
+                    alert("Sesion guardada correctamente");
+                    window.location.href = "index.php?action=tutorias";
+                  </script>';
+
+        }else{
+            echo '<script> alert("Error al guardar") </script>';
+        }
+
+        //echo 'Datos de la tutoria: ';
+        //print_r($datosTutoria);
+
+
+    }
+
+
+    public function obtenerDatosSesiones(){
+
+
+        $datosSesiones = array();
+        
+        //Esta funcion del modelo no pide la tabla ya que se trata de una union de todas las tres tablas existentes para traer todos los datos completos y entendibles
+        $datosSesiones = Datos::traerDatosSesiones();
+
+        return $datosSesiones;
+
+
+    }
+
+    public function obtenerAlumnosSesion($idSesion){
+
+        $datosAlumnos = array();
+        
+        //Esta funcion del modelo no pide la tabla ya que se trata de una union de todas las tres tablas existentes para traer todos los datos completos y entendibles
+        $datosAlumnos = Datos::traerDatosAlumnosSesiones($idSesion);
+
+        return $datosAlumnos;
+
+    }
+
+    public function eliminarSesion(){
+
+        $sesion = $_GET['id'];
+        
+        $respuesta = Datos::eliminarDatosSesion($sesion, "sesiones");
+
+        //Se notifca al usuario como se realizo en los metodos pasados y si se borro exitosamente lo redirecciona a la pagina principal en donde estan listados todos los usuarios
+        if($respuesta == "success"){
+            echo '<script> 
+                    alert("Sesion eliminada correctamente");
+                    window.location.href = "index.php?action=tutorias";
+                  </script>';
+        }else{
+            echo '<script> alert("Error al eliminar") </script>';
+        }
+
+
+    }
+
+    public function obtenerDatosAlumnoSesion($idAlumno){
+
+        $datosSesion = array();
+        
+        //Esta funcion del modelo no pide la tabla ya que se trata de una union de todas las tres tablas existentes para traer todos los datos completos y entendibles
+        $datosSesion = Datos::traerDatosAlumnoSesion($idAlumno);
+
+        return $datosSesion;
+
+    }
+
+
+    public function datosDashboardTutor(){
+
+        
+
+    }
 
 }

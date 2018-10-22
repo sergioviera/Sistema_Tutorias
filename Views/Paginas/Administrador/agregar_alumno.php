@@ -28,42 +28,42 @@ $datosTutores = $controlador -> obtenerDatosTutores();
 
 <div class="row">
 
-        <div class="col-md-10">
+    <div class="col-md-10">
 
-          <!-- general form elements -->
-          <div class="box box-primary">
+        <!-- general form elements -->
+        <div class="box box-primary">
 
             <div class="box-header with-border">
-              <h3 class="box-title">Agregue los datos del alumno</h3>
+                <h3 class="box-title">Agregue los datos del alumno</h3>
             </div>
 
             <!-- /.box-header -->
             <!-- form start -->
             <form method="POST" enctype="multipart/form-data">
-              
-              <div class="box-body">
+                
+                <div class="box-body">
 
                 <div class="form-group">
-                  <label for="matricula">Matricula</label>
-                  <input type="number" class="form-control" name="matricula" placeholder="Ingrese la matricula">
+                    <label for="matricula">Matricula</label>
+                    <input type="number" class="form-control" name="matricula" placeholder="Ingrese la matricula">
                 </div>
 
                 <div class="form-group">
-                  <label for="nombre">Nombre</label>
-                  <input type="text" class="form-control" name="nombre" placeholder="Nombre completo del alumno">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" placeholder="Nombre completo del alumno">
                 </div>
 
                 <div class="form-group">    
-                  <label for="carrera">Carrera</label>
-                  <select class="form-control" name="carrera">
-                      <?php
+                    <label for="carrera">Carrera</label>
+                    <select class="form-control" name="carrera">
+                        <?php
 
-                          for($i = 0; $i < count($datosCarreras); $i++ ){
-                              echo '<option value="'.$datosCarreras[$i]['carrera_id'].'"> '. $datosCarreras[$i]['nombre'] .' </option>';
-                          }
-                      
-                      ?>
-                  </select>
+                            for($i = 0; $i < count($datosCarreras); $i++ ){
+                                echo '<option value="'.$datosCarreras[$i]['carrera_id'].'"> '. $datosCarreras[$i]['nombre'] .' </option>';
+                            }
+                        
+                        ?>
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -84,7 +84,7 @@ $datosTutores = $controlador -> obtenerDatosTutores();
                     <select class="form-control" name="tutor">
                         <?php
                             for($i = 0; $i < count($datosTutores); $i++ ){
-                                echo '<option value="'.$datosTutores[$i]['tutor_id'].'"> '. $datosTutores[$i]['nombre'] .' </option>';
+                                echo '<option value="'.$datosTutores[$i]['numero_empleado'].'"> '. $datosTutores[$i]['nombre'] .' </option>';
                             }
                         ?>
                     </select>
@@ -96,17 +96,18 @@ $datosTutores = $controlador -> obtenerDatosTutores();
                     <input type="file" class="form-control input-lg" name="foto"  />
                 </div>
 
-              </div>
-              <!-- /.box-body -->
+                </div>
+                <!-- /.box-body -->
 
-              <div class="box-footer">
+                <div class="box-footer">
                 <center> <input type="submit" class="btn btn-primary input-lg" value="Guardar Datos" /> </center>
-              </div>
-              
+                </div>
+                
             </form>
-          </div>
-          <!-- /.box -->
+
         </div>
+        <!-- /.box -->
+    </div>
 </div>
 <!-- /.row -->
 
@@ -118,7 +119,7 @@ $datosTutores = $controlador -> obtenerDatosTutores();
 if(isset($_POST['matricula'])){
     
     //Funcion del controlador que permite la lecutra de todas las variables del formulario para reunirlas en un objeto y posteriormente pasarlas al modelo apra que la almacene
-    $Controlador ->  guardarDatosAlumno();
+    $controlador ->  guardarDatosAlumno();
 
 }
 

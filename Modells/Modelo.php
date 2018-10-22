@@ -21,8 +21,8 @@ class Modelo
                 $enlace == "editar_alumno" ||
                 $enlace == "editar_carrera" ||
                 $enlace == "editar_tutor" || 
+                $enlace == "editar_tema" ||
                 $enlace == "reportes_alumno" ||
-                $enlace == "reportes_fecha" ||
                 $enlace == "reportes_maestro" ||
                 $enlace == "reportes_tutoria" ||
                 $enlace == "temas" ||
@@ -48,7 +48,6 @@ class Modelo
                 $enlace == "alumnos" ||
                 $enlace == "dashboard_tutor" ||
                 $enlace == "reportes_alumno" ||
-                $enlace == "reportes_fecha" ||
                 $enlace == "reportes_tutoria" || 
                 $enlace == "salir" ||
                 $enlace == "tutorias" )

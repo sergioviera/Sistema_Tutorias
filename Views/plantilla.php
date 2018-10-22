@@ -38,6 +38,24 @@
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="Public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="Public/plugins/iCheck/all.css">
+
+  <!-- Select2 -->
+  <link rel="stylesheet" href="Public/bower_components/select2/dist/css/select2.min.css">
+
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="Public/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+
+  <!-- Bootstrap time Picker -->
+  <link rel="stylesheet" href="Public/plugins/timepicker/bootstrap-timepicker.min.css">
+  
+
+  <link rel="stylesheet" href="Public/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="Public/css/skins/_all-skins.min.css">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -78,12 +96,7 @@
     
   </div>
 
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0.0
-    </div>
-    <strong>2018  Wbario Martinez & Rojas Huerta
-  </footer>-->
+
 
 <!--Archivos JavaScript-->
 
@@ -137,9 +150,43 @@
 <!-- FastClick -->
 <script src="Public/bower_components/fastclick/lib/fastclick.js"></script>
 
+<!-- Select2 -->
+<script src="Public/bower_components/select2/dist/js/select2.full.min.js"></script>
+
+<!-- bootstrap datepicker -->
+<script src="Public/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+<!-- bootstrap time picker -->
+<script src="Public/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+
+<!-- iCheck 1.0.1 -->
+<script src="Public/plugins/iCheck/icheck.min.js"></script>
+
 <!-- page script -->
 <script>
   $(function () {
+
+    //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass   : 'iradio_minimal-blue'
+    })
+
+    //Date picker
+    $('#datepicker').datepicker({
+      autoclose: true, format: 'yyyy-mm-dd'
+    })
+    
+    //Timepicker
+    $('.timepicker').timepicker({
+      showInputs: false
+    })
+
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+
+    //Inicializacion de Data-Table
     $('#tabla').DataTable({
       "ordering": false,
       "info":     false,

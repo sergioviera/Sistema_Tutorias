@@ -34,7 +34,9 @@ $datosAlumnos = $controlador -> obtenerDatosAlumnos();
 <div class="box">
 
     <div class="box-header">
-    <!--<h3 class="box-title">Data Table With Full Features</h3> -->
+        <!--<h3 class="box-title">Data Table With Full Features</h3> -->
+        <a href="index.php?action=agregar_alumno" class="btn btn-primary " > <i class="fas fa-plus-square"></i> Agregar nuevo alumno </a>
+        <hr>
     </div>
 
     <!-- /.box-header -->
@@ -70,7 +72,7 @@ $datosAlumnos = $controlador -> obtenerDatosAlumnos();
 
                             echo '<td> <a href="index.php?action=editar_alumno&id='.$datosAlumnos[$i]['matricula'].'" type="button" class="btn btn-warning"> <i class="fas fa-edit"></i> </a> </td>';
                             
-                            echo '<td>  <a href="index.php?action=eliminar_alumno&id='.$datosAlumnos[$i]['matricula'].'" type="button"  class="btn btn-danger"> <i class="fas fa-trash-alt"></i>  </a> </td>';
+                            echo '<td>  <a href="index.php?action=alumnos&accion=eliminar_alumno&id='.$datosAlumnos[$i]['matricula'].'" type="button"  class="btn btn-danger"> <i class="fas fa-trash-alt"></i>  </a> </td>';
                         echo '</tr>';
                     }
                 
@@ -83,3 +85,15 @@ $datosAlumnos = $controlador -> obtenerDatosAlumnos();
     
 
 </section>
+
+
+<?php
+
+//Valida que se accion el metodo solo si se hace clic en el boton y no cuando se cargue pagina
+if(isset($_GET['accion'])) {
+    if( $_GET['accion'] == "eliminar_alumno"){
+        $controlador -> eliminarAlumno();
+    }
+}
+
+?>
