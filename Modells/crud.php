@@ -528,6 +528,42 @@ class Datos extends Conexion{
 
     }
 
+    public function traerDatosTodasSesiones(){
+
+        //Es la union de las tablas alumnos, carreras y tutores
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM sesiones as t1 INNER JOIN sesion_tema AS t2 ON t2.tema_id = t1.tema INNER JOIN tutores as t3 ON t3.numero_empleado = t1.tutor");
+
+        $stmt->execute();
+
+        $r = array();
+
+        //Se guardan todos los datos en el arreglo antes creado
+        $r = $stmt->FetchAll();
+        
+        //SE retornan al controlador para luego ser aventadas a la vista xD
+        return $r;
+
+    }
+
+    public function traerDatosTodasSesionesPorTutor($tutor){
+
+        //Es la union de las tablas alumnos, carreras y tutores
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM sesiones as t1 INNER JOIN sesion_tema AS t2 ON t2.tema_id = t1.tema INNER JOIN tutores as t3 ON t3.numero_empleado = t1.tutor WHERE tutor = :tutor");
+
+        $stmt->bindParam(":tutor",  $tutor ,  PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $r = array();
+
+        //Se guardan todos los datos en el arreglo antes creado
+        $r = $stmt->FetchAll();
+        
+        //SE retornan al controlador para luego ser aventadas a la vista xD
+        return $r;
+
+    }
+
     public function traerDatosAlumnosSesiones($idSesion){
 
         //Es la union de las tablas alumnos, carreras y tutores
@@ -580,6 +616,66 @@ class Datos extends Conexion{
         
         //SE retornan al controlador para luego ser aventadas a la vista xD
         return $r;
+
+    }
+
+
+    public function agregarDatosTutor($datosTutor){
+
+        
+        $pdo = Conexion::conectar();
+        //Se prepara el query con el comando INSERT -> DE INSERTAR 
+        $stmt = $pdo->prepare("INSERT INTO tutores(numero_empleado, nombre, carrera, correo, contrasena) VALUES(:numero, :nombre, :carrera, :correo, MD5(:contrasena) )");
+        
+        $stmt->bindParam(":numero",  $datosTutor['numero'] ,  PDO::PARAM_INT);
+        $stmt->bindParam(":nombre",  $datosTutor['nombre'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":carrera",  $datosTutor['carrera'] ,  PDO::PARAM_INT);
+        $stmt->bindParam(":correo",  $datosTutor['correo'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":contrasena",  $datosTutor['contrasena'] ,  PDO::PARAM_STR);
+
+        if($stmt->execute() ){
+            return "success";
+        }else{
+            return "error";
+        }
+
+
+    }
+
+    public function eliminarDatosTutor($id, $tabla){
+
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE numero_empleado = :id ");
+
+        $stmt->bindParam(":id", $id , PDO::PARAM_INT);
+
+        //Le informa al controlador si se realizao con exito o no dicha transaccion
+        if($stmt->execute() ){
+            return "success";
+        }else{
+            return "error";
+        }
+    }
+
+    public function editarDatosTutor($datosTutor){
+
+
+        $pdo = Conexion::conectar();
+        
+        $stmt = $pdo->prepare("UPDATE tutores SET nombre = :nombre, carrera = :carrera, correo = :correo, contrasena = MD5(:contrasena) WHERE numero_empleado = :numero");
+        
+        
+        $stmt->bindParam(":nombre",  $datosTutor['nombre'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":carrera",  $datosTutor['carrera'] ,  PDO::PARAM_INT);
+        $stmt->bindParam(":correo",  $datosTutor['correo'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":contrasena",  $datosTutor['contrasena'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":numero",  $datosTutor['numero'] ,  PDO::PARAM_INT);
+
+        if($stmt->execute() ){
+            return "success";
+        }else{
+            return "error";
+        }
+
 
     }
 

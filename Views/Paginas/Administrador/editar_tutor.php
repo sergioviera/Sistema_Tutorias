@@ -1,3 +1,37 @@
+<?php
+//Se instancia a un objeto de l clase controlador para que se manden llamar todos los metodo que cominican a la vista con el controlador
+$controlador = new Controlador();
+
+//Se crean dos arreglos para recibir la informacion de las carreras y los tutores
+$datosCarreras = array();
+$datosTutores = array();
+
+//Se mandan llamar los metodos que traen estos datos, estos retornan un arreglo asociativo, esta informacion sera desplegada en los campos del formulario en donde se necesite mostrar los datos de la tabla que existen
+$datosCarreras = $controlador -> obtenerDatosCarreras();
+$datosTutores = $controlador -> obtenerDatosTutores();
+
+
+$tutorAEditar = $_GET['id'];
+
+$numero_empleado = 0.0;
+$nombre = "";
+$correo = "";
+$contrasena = "";
+
+for($i=0; $i < count($datosTutores); $i++ ){
+    if($datosTutores[$i]['numero_empleado'] == $tutorAEditar ){
+
+        $numero_empleado = $datosTutores[$i]['numero_empleado'];
+        $nombre = $datosTutores[$i]['nombre'];
+        $correo = $datosTutores[$i]['correo'];
+        $contrasena = $datosTutores[$i]['contrasena'];
+        
+    }
+}
+
+
+?>
+
 <section class="content-header">
     <h1>
         Editar Tutor
@@ -8,55 +42,89 @@
         <li><a href="#"><i class="fa fa-dashboard"></i> Tutores </a></li>
         <li class="active">Editar Tutor</li>
     </ol>
-    <div class="box box-primary">
-           
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form role="form" method='post' enctype="multipart/form-data">
-              <div class="box-body">
 
-                <div class="form-group">
-                  <label for="numero">Numero del empleado</label>
-                  <input type="text" class="form-control" id="numero" placeholder="Escribe numero de empleado" name="numero">
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+
+        <div class="col-md-10">
+
+            <!-- general form elements -->
+            <div class="box box-primary">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title">Agregue los datos del tutor</h3>
                 </div>
 
-                <div class="form-group">
-                  <label for="nombre">Nombre del tutor</label>
-                  <input type="text" class="form-control" id="nombre" placeholder="Escribe nombre" nmae="nombre">
-                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form method="POST">
+                    
+                    <div class="box-body">
 
-              <div class="form-group">
-                <label>Carrera</label>
-                <select class="form-control select2" style="width: 100%;" name=carrera>
-                  <option selected="selected" value="1">ITI</option>
-                  <option value="2">MECA</option>
-                  <option value="3">ISA</option>
-                  <option value="4">PYMES</option>
-                  <option value="5">MANU</option>
-                </select>
-              </div>
+                        
+                        
+                        <div class="form-group">
+                            <label for="numero">Numero: </label>
+                            <input type="text" class="form-control" name="numero" placeholder="Numero del tutor" value="<?= $numero_empleado ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre">Nombre: </label>
+                            <input type="text" class="form-control" name="nombre" placeholder="Nombre completo del tutor" value="<?= $nombre ?>">
+                        </div>
+
+                        <div class="form-group">    
+                            <label for="carrera">Carrera: </label>
+                            <select class="form-control" name="carrera">
+                                <?php
+
+                                    for($i = 0; $i < count($datosCarreras); $i++ ){
+                                        echo '<option value="'.$datosCarreras[$i]['carrera_id'].'"> '. $datosCarreras[$i]['nombre'] .' </option>';
+                                    }
+                                
+                                ?>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="correo">Correo: </label>
+                            <input type="email" class="form-control" name="correo" placeholder="Correo del tutor" value="<?= $correo ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contrasena">Contrasena: </label>
+                            <input type="password" class="form-control" name="contrasena" placeholder="Contrasena para ingreso de tutor" value="<?= $contrasena ?>">
+                        </div>
+
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                    <center> <input type="submit" class="btn btn-primary input-lg" value="Editar Datos" /> </center>
+                    </div>
+                    
+                </form>
+
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+
+</section>
 
 
-              <div class="form-group">
-                  <label for="correo">Correo</label>
-                  <input type="email" class="form-control" id="correo" placeholder="Escribe correo institucional" name="correo">
-              </div>
+<?php
 
-              <div class="form-group">
-                  <label for="password">Contraseña</label>
-                  <input type="password" class="form-control" id="correo" placeholder="Escribe contraseña" name="password">
-              </div>
+if(isset($_POST['numero']) ){
 
 
-                <div class="form-group">
-                  <label for="foto">Selecciona foto del tutor</label>
-                  <input type="file" id="foto">
-                </div>
+    $controlador->editarDatosTutor();
 
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Enviar</button>
-              </div>
-            </form>
-          </div>
+}
+
+?>

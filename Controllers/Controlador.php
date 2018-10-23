@@ -593,6 +593,31 @@ class Controlador
 
     }
 
+    public function obtenerDatosTodasSesiones(){
+
+
+        $datosSesiones = array();
+        
+        //Esta funcion del modelo no pide la tabla ya que se trata de una union de todas las tres tablas existentes para traer todos los datos completos y entendibles
+        $datosSesiones = Datos::traerDatosTodasSesiones();
+
+        return $datosSesiones;        
+
+    }
+
+
+    public function obtenerDatosTodasSesionesPorTutor($tutor){
+
+
+        $datosSesiones = array();
+        
+        //Esta funcion del modelo no pide la tabla ya que se trata de una union de todas las tres tablas existentes para traer todos los datos completos y entendibles
+        $datosSesiones = Datos::traerDatosTodasSesionesPorTutor($tutor);
+
+        return $datosSesiones;        
+
+    }
+
     public function obtenerAlumnosSesion($idSesion){
 
         $datosAlumnos = array();
@@ -634,10 +659,76 @@ class Controlador
 
     }
 
+    public function agregarDatosTutor(){
 
-    public function datosDashboardTutor(){
+        $datosTutor = array(
+            'numero' => $_POST['numero'],
+            'nombre' => $_POST['nombre'],
+            'carrera' => $_POST['carrera'],
+            'correo' => $_POST['correo'],
+            'contrasena' => $_POST['contrasena']
+        );
+
+
+        //print_r($datosTutor);
+
+        $respuesta = Datos::agregarDatosTutor($datosTutor);
+
+        //Se notifca al usuario como se realizo en los metodos pasados y si se borro exitosamente lo redirecciona a la pagina principal en donde estan listados todos los usuarios
+        if($respuesta == "success"){
+            echo '<script> 
+                    alert("Tutor agregado correctamente");
+                    window.location.href = "index.php?action=tutores";
+                  </script>';
+        }else{
+            echo '<script> alert("Error al guardar") </script>';
+        }
+
+    }
+
+
+    public function  eliminarTutor(){
+
+        $tutor = $_GET['id'];
+        
+        $respuesta = Datos::eliminarDatosTutor($tutor , "tutores");
+
+        //Se notifca al usuario como se realizo en los metodos pasados y si se borro exitosamente lo redirecciona a la pagina principal en donde estan listados todos los usuarios
+        if($respuesta == "success"){
+            echo '<script> 
+                    alert("Tutor eliminado correctamente");
+                    window.location.href = "index.php?action=tutores";
+                  </script>';
+        }else{
+            echo '<script> alert("Error al eliminar") </script>';
+        }
+
+    }
+
+    public function editarDatosTutor(){
 
         
+        $datosTutor = array(
+            'numero' => $_POST['numero'],
+            'nombre' => $_POST['nombre'],
+            'carrera' => $_POST['carrera'],
+            'correo' => $_POST['correo'],
+            'contrasena' => $_POST['contrasena']
+        );
+
+
+        $respuesta = Datos::editarDatosTutor($datosTutor);
+
+        //Se notifca al usuario como se realizo en los metodos pasados y si se borro exitosamente lo redirecciona a la pagina principal en donde estan listados todos los usuarios
+        if($respuesta == "success"){
+            echo '<script> 
+                    alert("Tutor actualizado correctamente");
+                    window.location.href = "index.php?action=tutores";
+                  </script>';
+        }else{
+            echo '<script> alert("Error al actualizar") </script>';
+        }
+
 
     }
 

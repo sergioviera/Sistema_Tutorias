@@ -30,7 +30,8 @@
 <div class="box">
 
     <div class="box-header">
-    <!--<h3 class="box-title">Data Table With Full Features</h3> -->
+        <a href="index.php?action=agregar_carrera" class="btn btn-primary " > <i class="fas fa-plus-square"></i> Agregar nueva carrera </a>
+        <hr>
     </div>
 
     <!-- /.box-header -->
