@@ -29,7 +29,7 @@
   
     <div class="login-box-body">
         
-        <img class="center-block img-circle" src="Public/img/logo.jpg" width="150px" height="150px">
+        <img class="center-block img-circle" src="Public/img/logo.png" width="150px" height="150px">
         <p class="login-box-msg " ><b><h3 align="center">Sistema de Tutorias</h3><b></p>
         <!--<p class="login-box-msg"><b>INICIO DE SESIÓN<b></p>-->
         <form  method="post">
