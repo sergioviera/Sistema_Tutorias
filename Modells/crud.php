@@ -272,7 +272,7 @@ class Datos extends Conexion{
     public function guardarDatosUsuario($datosAlumno, $tabla){
 
         //Se prepara el query con el comando INSERT -> DE INSERTAR 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(matricula, nombre, carrera, situacion, correo, tutor_id, foto) VALUES(:matricula, :nombre, :carrera_id, :situacion, :correo, :tutor_id, :foto) ");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(matricula, nombre, carrera, situacion, correo, telefono, tutor_id, foto) VALUES(:matricula, :nombre, :carrera_id, :situacion, :correo, :telefono, :tutor_id, :foto) ");
         
         //Se colocan todos sus parametros especificados, y se relacionan con los datos pasdaos por parametro a esta funcion desde el controladro en modo de array asociativo
         //Asi como se especifica como deben ser tratados (tipo de dato)
@@ -281,6 +281,7 @@ class Datos extends Conexion{
         $stmt->bindParam(":carrera_id", $datosAlumno["carrera"], PDO::PARAM_INT);
         $stmt->bindParam(":situacion", $datosAlumno["situacion"], PDO::PARAM_STR);
         $stmt->bindParam(":correo", $datosAlumno["correo"], PDO::PARAM_STR);
+        $stmt->bindParam(":telefono", $datosAlumno["telefono"], PDO::PARAM_STR);
         $stmt->bindParam(":tutor_id", $datosAlumno["tutor"], PDO::PARAM_INT);
         $stmt->bindParam(":foto", $datosAlumno["foto"], PDO::PARAM_STR);
 
@@ -301,7 +302,7 @@ class Datos extends Conexion{
 
         //Se prepara el query con el comando UPDATE -> DE EDITAR, O ACTUALIZAR
         $stmt = Conexion::conectar()->prepare("UPDATE $tabla 
-                                               SET nombre = :nombre, carrera = :carrera, situacion = :situacion, correo = :correo, tutor_id = :tutor, foto = :foto
+                                               SET nombre = :nombre, carrera = :carrera, situacion = :situacion, correo = :correo, telefono = :telefono, tutor_id = :tutor, foto = :foto
                                                WHERE matricula = :matricula ");
         
         //Se relacionan todos los parametros con los pasados en el arreglo asociativo desde el controlador
@@ -309,6 +310,7 @@ class Datos extends Conexion{
         $stmt->bindParam(":carrera", $datosAlumno["carrera"], PDO::PARAM_INT);
         $stmt->bindParam(":situacion", $datosAlumno["situacion"], PDO::PARAM_STR);
         $stmt->bindParam(":correo", $datosAlumno["correo"], PDO::PARAM_STR);
+        $stmt->bindParam(":telefono", $datosAlumno["telefono"], PDO::PARAM_STR);
         $stmt->bindParam(":tutor", $datosAlumno["tutor"], PDO::PARAM_INT);
         $stmt->bindParam(":foto", $datosAlumno["foto"] , PDO::PARAM_STR);
         $stmt->bindParam(":matricula", $datosAlumno["matricula"] , PDO::PARAM_STR);
