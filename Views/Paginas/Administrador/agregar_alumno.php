@@ -44,8 +44,8 @@ $datosTutores = $controlador -> obtenerDatosTutores();
                 <div class="box-body">
 
                 <div class="form-group">
-                    <label for="matricula">Matricula</label>
-                    <input type="number" class="form-control" name="matricula" placeholder="Ingrese la matricula">
+                    <label for="matricula">DNI</label>
+                    <input type="number" class="form-control" name="matricula" placeholder="Ingrese el DNI">
                 </div>
 
                 <div class="form-group">
@@ -54,7 +54,7 @@ $datosTutores = $controlador -> obtenerDatosTutores();
                 </div>
 
                 <div class="form-group">    
-                    <label for="carrera">Carrera</label>
+                    <label for="carrera">Colegio</label>
                     <select class="form-control" name="carrera">
                         <?php
 
@@ -67,16 +67,25 @@ $datosTutores = $controlador -> obtenerDatosTutores();
                 </div>
 
                 <div class="form-group">
-                    <label for="situacion">Situacion Academica</label>
+                    <label for="situacion">Grado</label>
                     <select class="form-control" name="situacion">
-                        <option>Regular</option>
-                        <option>Especial</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="correo">Correo</label>
                     <input type="text" class="form-control" name="correo" placeholder="alguien@ejemplo.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Tel&eacute;fono</label>
+                    <input type="text" class="form-control" name="telefono" placeholder="Ingrese el telefono con prefijo">
                 </div>
 
                 <div class="form-group">
@@ -92,7 +101,7 @@ $datosTutores = $controlador -> obtenerDatosTutores();
 
                 <!--Campo que subre la fotografia al servidor, lo coloca en una carpeta temporal desde donde se toma y se almacena en una carpeta especificada, para poder subir la imagen en el formulario se debe cambiar el encabezado a tipo  enctype="multipart/form-data" -->
                 <div class="form-group">
-                    <label for="foto">Fotografia</label> <br>
+                    <label for="foto">Foto</label> <br>
                     <input type="file" class="form-control input-lg" name="foto"  />
                 </div>
 
