@@ -232,7 +232,7 @@ class Datos extends Conexion{
     public function traerDatosAlumnos(){
 
         //Es la union de las tablas alumnos, carreras y tutores
-        $stmt = Conexion::conectar()->prepare("SELECT t1.matricula as matricula, t1.nombre as alumno, t2.nombre as carrera, t1.situacion as situacion, t1.correo as correo, t1.telefono as telefono, t3.nombre as tutor,t1.foto as foto FROM alumnos as t1 INNER JOIN carreras AS t2 ON t2.carrera_id = t1.carrera INNER JOIN tutores AS t3 ON t3.numero_empleado = t1.tutor_id");
+        $stmt = Conexion::conectar()->prepare("SELECT t1.matricula as matricula, t1.nombre as alumno, t2.nombre as carrera, t1.situacion as situacion, t1.correo as correo, t1.telefono as telefono, t3.nombre as tutor,t1.foto as foto FROM alumnos as t1 INNER JOIN carreras AS t2 ON t2.carrera_id = t1.carrera left JOIN tutores AS t3 ON t3.numero_empleado = t1.tutor_id");
 
         $stmt->execute();
 
