@@ -349,7 +349,6 @@ class Controlador
         //Se recibe la respuesta del metodo y si esta es exitosa se manda un mensaje de notificacion al cliente y se reenvia al usuario a la lista de todos los usuarios para que vea la insercion del nuevo alumno.
         if($respuesta == "success"){
             echo '<script> 
-                        alert("Datos guardados correctamente");
                         window.location.href = "index.php?action=alumnos"; 
                   </script>';
             //header('index.php?action=alumnos');

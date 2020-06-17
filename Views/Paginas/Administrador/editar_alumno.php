@@ -47,28 +47,28 @@ $datosAlumno = $controlador -> obtenerDatosAlumno();
                 <div class="box-body">
 
                 <div class="form-group" style="text-align: center;">
-                    <img src="fotos/<?= $datosAlumno[0][6] ?>" name="fotoActual" height="200px" width="200px"/> 
+                    <img src="fotos/<?= $datosAlumno[0]['foto'] ?>" name="fotoActual" height="200px" width="200px"/> 
                 </div>
 
-                <input type="hidden" name="fotoActual" value="<?= $datosAlumno[0][6] ?>">
+                <input type="hidden" name="fotoActual" value="<?= $datosAlumno[0]['foto'] ?>">
 
                 <div class="form-group">
-                    <label for="matricula">Matricula</label>
-                    <input type="text" class="form-control" name="matricula" placeholder="1800001" value=" <?= $datosAlumno[0][0] ?> " disabled/>
+                    <label for="matricula">DNI</label>
+                    <input type="text" class="form-control" name="matricula" placeholder="1800001" value=" <?= $datosAlumno[0]['matricula'] ?> " disabled/>
                 </div>
                 
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" placeholder="Juanito Perez" value="<?= $datosAlumno[0][1] ?>" >
+                    <input type="text" class="form-control" name="nombre" placeholder="Juanito Perez" value="<?= $datosAlumno[0]['alumno'] ?>" >
                 </div>
 
                 <div class="form-group">    
-                    <label for="carrera">Carrera</label>
+                    <label for="carrera">Escuela</label>
                     <select class="form-control" name="carrera">
                         <?php
 
                             for($i = 0; $i < count($datosCarreras); $i++ ){
-                                if( ! ($datosAlumno[0][2] == $datosCarreras[$i]['nombre']) ){
+                                if( ! ($datosAlumno[0]['carrera'] == $datosCarreras[$i]['nombre']) ){
                                     echo '<option value="'.$datosCarreras[$i]['carrera_id'].'"> '. $datosCarreras[$i]['nombre'] .' </option>';
                                 }else{
                                     echo '<option value="'.$datosCarreras[$i]['carrera_id'].'" selected="selected"> '. $datosCarreras[$i]['nombre'] .' </option>';
@@ -77,26 +77,26 @@ $datosAlumno = $controlador -> obtenerDatosAlumno();
                         ?>
                     </select>
                 </div>
-
                 <div class="form-group">
-                    <label for="situacion">Situacion Academica</label>
+                    <label for="situacion">Grado</label>
                     <select class="form-control" name="situacion">
-                        <?php
-                            if($datosAlumno[0][3] == "Regular"){
-                                echo '<option selected="selected">Regular</option>
-                                    <option>Especial</option>';
-                            }else{
-                                echo '<option>Regular</option>
-                                    <option selected="selected">Especial</option>';
-                            }
-                        
-                        ?>
+                        <option <?php echo ($datosAlumno[0][3] == "1")?'selected="selected"':'' ?>>1</option>
+                        <option <?php echo ($datosAlumno[0][3] == "2")?'selected="selected"':'' ?>>2</option>
+                        <option <?php echo ($datosAlumno[0][3] == "3")?'selected="selected"':'' ?>>3</option>
+                        <option <?php echo ($datosAlumno[0][3] == "4")?'selected="selected"':'' ?>>4</option>
+                        <option <?php echo ($datosAlumno[0][3] == "5")?'selected="selected"':'' ?>>5</option>
+                        <option <?php echo ($datosAlumno[0][3] == "6")?'selected="selected"':'' ?>>6</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="correo">Correo</label>
-                    <input type="text" class="form-control" name="correo" placeholder="alguien@ejemplo.com" value=" <?= $datosAlumno[0][4] ?>" >
+                    <input type="text" class="form-control" name="correo" placeholder="alguien@ejemplo.com" value=" <?= $datosAlumno[0]['correo'] ?>" >
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefono">Tel&eacute;fono</label>
+                    <input type="text" class="form-control" name="telefono" placeholder="Ingrese un teléfono" value=" <?= $datosAlumno[0]['telefono'] ?>" >
                 </div>
                 
                 <div class="form-group">
@@ -106,7 +106,7 @@ $datosAlumno = $controlador -> obtenerDatosAlumno();
                             for($i = 0; $i < count($datosTutores); $i++ ){
                                 
 
-                                if( ! ($datosAlumno[0][5] == $datosTutores[$i]['nombre'] ) ){
+                                if( ! ($datosAlumno[0]['tutor'] == $datosTutores[$i]['nombre'] ) ){
                                     echo '<option value="'.$datosTutores[$i]['numero_empleado'].'"> '. $datosTutores[$i]['nombre'] .' </option>';
                                 }else{
                                     echo '<option value="'.$datosTutores[$i]['numero_empleado'].'" selected="selected"> '. $datosTutores[$i]['nombre'] .' </option>';

@@ -39,17 +39,22 @@ $datosAlumnos = $controlador -> obtenerDatosAlumnos();
         <hr>
     </div>
 
+    <!-- Alerta al usuario -->
+    <?php if(isset($_GET['msg'])){ ?>
+        <div id="msg" class="alert alert-success" role="alert"><?php echo $_GET['msg']?></div><script type="text/javascript">window.onload = function() {$("#msg").delay(2000).slideUp(200, function() {$(this).alert('close');});}</script>
+    <?php } ?>
+
     <!-- /.box-header -->
     <div class="box-body">
         <table id="tabla" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <!--Columnas de la cabecera de la tabla-->
-                    <th>Matricula</th>
+                    <th>DNI</th>
                     <th>Nombre</th>
-                    <th>Carrera</th>
-                    <th>Situacion</th>
-                    <th>Correo</th>
+                    <th>Escuela</th>
+                    <th>Grado</th>
+                    <th>Tel&eacute;fono</th>
                     <th>Tutor</th>
                     <th>Foto</th>
                     <th>Modificar</th>
@@ -65,9 +70,9 @@ $datosAlumnos = $controlador -> obtenerDatosAlumnos();
                             echo '<td>'. $datosAlumnos[$i]['alumno'] .'</td>';
                             echo '<td>'. $datosAlumnos[$i]['carrera'] .'</td>';
                             echo '<td>'. $datosAlumnos[$i]['situacion'] .'</td>';
-                            echo '<td>'. $datosAlumnos[$i]['correo'] .'</td>';
+                            echo '<td>'. $datosAlumnos[$i]['telefono'] .'</td>';
                             echo '<td>'. $datosAlumnos[$i]['tutor'] .'</td>';
-                            echo '<td>'. $datosAlumnos[$i]['foto'] .'</td>';
+                            echo '<td><img src="fotos/'. $datosAlumnos[$i]['foto'] .'" width="30px" height="30px"></td>';
                             //Estos dos de abajo son los botones, se puede observar que estan listos para redirigir el flujo de la app a una pagina que se ellama editar y eliminar, teniendo un parametro el cual es la matricula del alumno a administrar
 
                             echo '<td> <a href="index.php?action=editar_alumno&id='.$datosAlumnos[$i]['matricula'].'" type="button" class="btn btn-warning"> <i class="fas fa-edit"></i> </a> </td>';
