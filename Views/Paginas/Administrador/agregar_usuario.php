@@ -19,14 +19,12 @@
                   <label for="nombre">Nombre</label>
                   <input type="text" class="form-control" id="nombre" placeholder="Escribe tu nombre" name="nombre">
                 </div>
-
                 <div class="form-group">
-                  <label for="rol">Rol</label>
-                  
-
-                  <div class="form-group has-feedback">
-                	<input type="text" class="form-control" id="rol" placeholder="Escribe el rol" name="rol">
-            		</div>
+                    <label for="rol">Rol</label>
+                    <select class="form-control" name="rol">
+                        <option>Administrador</option>
+                        <option>Tutor</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
