@@ -118,13 +118,13 @@
                             <i class="fa fa-user"></i> Por alumno 
                         </a>
                     </li>
-
+<!--
                     <li>
                         <a href="index.php?action=reportes_tutoria">
                             <i class="fas fa-hands-helping"></i> Por tutoria 
                         </a>
                     </li>
-
+-->
 
                 </ul>
             </li>

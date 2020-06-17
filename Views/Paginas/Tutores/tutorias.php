@@ -51,8 +51,7 @@ $datosSesiones = $controlador -> obtenerDatosSesiones();
                     <th>Tipo</th>
                     <th>Tema</th>
                     <th>Observaciones</th>
-                    <th>Alumno (s)</th>
-                    <th>Eliminar</th>
+                    <th>Alumno</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,7 +75,6 @@ $datosSesiones = $controlador -> obtenerDatosSesiones();
 
                             echo '<td>' . $alumnosEnUnaVariable . '</td>';
 
-                            echo '<td>  <a href="index.php?action=tutorias&accion=eliminar_sesion&id='.$datosSesiones[$i]['sesion_id'].'" type="button"  class="btn btn-danger"> <i class="fas fa-trash-alt"></i>  </a> </td>';
                         echo '</tr>';
                     }
                 ?>

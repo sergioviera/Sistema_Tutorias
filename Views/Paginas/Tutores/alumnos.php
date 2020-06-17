@@ -44,12 +44,13 @@ $datosAlumnos = $controlador -> obtenerDatosAlumnosPorProfe();
             <thead>
                 <tr>
                     <!--Columnas de la cabecera de la tabla-->
-                    <th>Matricula</th>
                     <th>Nombre</th>
-                    <th>Carrera</th>
-                    <th>Situacion</th>
+                    <th>Escuela</th>
+                    <th>Grado</th>
                     <th>Correo</th>
+                    <th>Tel&eacute;fono</th>
                     <th>Foto</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -57,12 +58,13 @@ $datosAlumnos = $controlador -> obtenerDatosAlumnosPorProfe();
                     //La tabla es llenada dinamicamente creando una nueva fila por cada registro en la tabla, toda la ifnormacion que aqui se despliega se trajo desde el controler con el metodo anteriormente definido
                     for($i=0; $i < count($datosAlumnos); $i++ ){
                         echo '<tr>';
-                            echo '<td>'. $datosAlumnos[$i]['matricula'] .'</td>';
                             echo '<td>'. $datosAlumnos[$i]['alumno'] .'</td>';
                             echo '<td>'. $datosAlumnos[$i]['carrera'] .'</td>';
                             echo '<td>'. $datosAlumnos[$i]['situacion'] .'</td>';
                             echo '<td>'. $datosAlumnos[$i]['correo'] .'</td>';
+                            echo '<td>'. $datosAlumnos[$i]['telefono'] .'</td>';
                             echo '<td> <img src=fotos/'. $datosAlumnos[$i]['foto'] .' height="100px" width="100px" /></td>';
+                            echo '<td><a href="index.php?action=agregar_tutoria&alumno='.$datosAlumnos[$i]['matricula'].'" class="btn btn-primary "><i class="fas fa-plus-square"></i> Agregar nueva tutoria </a></td>';
                         echo '</tr>';
                     }
                 

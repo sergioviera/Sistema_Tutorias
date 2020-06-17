@@ -51,19 +51,21 @@ $datosTemas = $controlador -> obtenerDatosTemas();
                     
                     <div class="form-group">
                         <label for="fecha">Fecha:</label>                                                 
-                        <input type="text" name="fecha" class="form-control pull-right" id="datepicker">
+                        <input type="text" name="fecha" class="form-control pull-right" id="datepicker" value="<?php echo date('Y-m-d'); ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="hora">Hora:</label>
-                        <input type="text" name="hora" class="form-control timepicker">
+                        <input type="text" name="hora" class="form-control timepicker" value="<?php echo gmdate('H:i', time() + 3600*(-3)); ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="tipo">Tipo:</label>
                         <select class="form-control" name="tipo">
-                            <option>Individual</option>
-                            <option>Grupal</option>
+                            <option>whatsapp</option>
+                            <option>email</option>
+                            <option>telefono</option>
+                            <option>otro (aclarar)</option>
                         </select>
                     </div>
 
@@ -85,7 +87,11 @@ $datosTemas = $controlador -> obtenerDatosTemas();
                         <?php
                             for($i=0; $i < count($datosAlumnos); $i++ )
                             {
-                                echo '<input class="minimal" type="checkbox" name="check_list[]" value="'.$datosAlumnos[$i]['matricula'].'"> <label>'.$datosAlumnos[$i]['alumno'].' </label> <br/>';
+                                if ( isset( $_GET['alumno'] ) && $_GET['alumno']=$datosAlumnos[$i]['matricula'] ){
+                                    echo '<input type="hidden" name="check_list[]" value="'.$datosAlumnos[$i]['matricula'].'" ><div id="msg" class="alert alert-info" role="alert">'.$datosAlumnos[$i]['alumno'].'</div>';
+                                }else{
+                                    echo '<input class="minimal" type="radio" name="check_list[]" value="'.$datosAlumnos[$i]['matricula'].'" > <label>'.$datosAlumnos[$i]['alumno'].' </label> <br/>';
+                                }
                             }
                         ?>
                     </div>
@@ -111,7 +117,12 @@ $datosTemas = $controlador -> obtenerDatosTemas();
 
 </section>
 <!-- /.content -->
+<script type="text/javascript">
+window.onload = function() {
+//    $('#datePicker').val(new Date().toDateInputValue());
+}
 
+</script>
 <?php
 
 //if(isset( $_POST['alumnos'] ) ){

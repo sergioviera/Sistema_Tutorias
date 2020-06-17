@@ -54,10 +54,7 @@ print_r($datosSesiones);
                         <select class="form-control" name="tutor">
                             <?php
                                 for($i = 0; $i < count($datosTutores); $i++ ){
-
                                     echo '<option value="'.$datosTutores[$i]['numero_empleado'].'"> '. $datosTutores[$i]['nombre'] .' </option>';
-                                    
-
                                 }
                             ?>
                         </select>
@@ -118,7 +115,6 @@ print_r($datosSesiones);
                             //if($_POST['tutor'] == $datosSesiones[$i]['tutor'] ){
                                 
                                 echo '<tr>';
-                                    echo '<td>'. $datosSesiones[$i]['nombre'].'</td>';
                                     echo '<td>'. $datosSesiones[$i]['sesion_id'] .'</td>';
                                     echo '<td>'. $datosSesiones[$i]['fecha'] .'</td>';
                                     echo '<td>'. $datosSesiones[$i]['hora'] .'</td>';
