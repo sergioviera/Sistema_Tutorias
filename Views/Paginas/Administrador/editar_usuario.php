@@ -20,8 +20,8 @@
             <form role="form" method='post'>
               <div class="box-body">
                 <div class="form-group">
-                  <label for="carrera_id">Id del usuario</label>
-                  <input type="text" name="carrera_id" value="<?= $datosUsuario[0]['usuario_id'] ?>" disabled>
+                  <label for="usuario_id">Id del usuario</label>
+                  <input type="text" name="usuario_id" value="<?= $datosUsuario[0]['usuario_id'] ?>" disabled>
                 </div>
 
                 <div class="form-group">
@@ -32,10 +32,10 @@
                 <div class="form-group">
                   <label for="rol">Rol</label>
                   <div class="form-group has-feedback">
-                  <select name="rol" class="form-control">
-                    <option value="Tutor"> Tutor </option>
-                    <option value="superadmin"> Administrador </option>
-                  </select>
+                  <select class="form-control" name="rol">
+                        <option>Administrador</option>
+                        <option>Tutor</option>
+                    </select>
                 </div>
                 </div>
 
