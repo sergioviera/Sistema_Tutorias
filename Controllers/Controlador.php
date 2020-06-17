@@ -349,7 +349,7 @@ class Controlador
         //Se recibe la respuesta del metodo y si esta es exitosa se manda un mensaje de notificacion al cliente y se reenvia al usuario a la lista de todos los usuarios para que vea la insercion del nuevo alumno.
         if($respuesta == "success"){
             echo '<script> 
-                        window.location.href = "index.php?action=alumnos"; 
+                        window.location.href = "index.php?action=alumnos&msg=Datos guardados correctamente"; 
                   </script>';
             //header('index.php?action=alumnos');
         }else{
@@ -384,7 +384,7 @@ class Controlador
         }else{
             
             if($extension != 'png' && $extension != 'jpg' && $extension != 'PNG' && $extension != 'JPG'){
-                echo '<script> alert("Error al subir el archivo intenta con otro") </sript>';
+                echo '<script> alert("Error al subir el archivo, formato no aceptado, intenta con otro") </sript>';
                 
                 $foto = $_POST['fotoActual'];
 
@@ -416,8 +416,7 @@ class Controlador
         if($respuesta == "success"){
             
             echo '<script> 
-                    alert("Datos guardados correctamente");
-                    window.location.href = "index.php?action=alumnos"; 
+                    window.location.href = "index.php?action=alumnos&msg=Datos guardados correctamente"; 
                   </script>';
             
         }else{
@@ -436,8 +435,7 @@ class Controlador
         //Se notifca al usuario como se realizo en los metodos pasados y si se borro exitosamente lo redirecciona a la pagina principal en donde estan listados todos los usuarios
         if($respuesta == "success"){
             echo '<script> 
-                    alert("Alumno eliminado");
-                    window.location.href = "index.php?action=alumnos";
+                    window.location.href = "index.php?action=alumnos&msg=Alumno eliminado";
                   </script>';
         }else{
             echo '<script> alert("Error al eliminar") </script>';
@@ -677,6 +675,7 @@ class Controlador
             'nombre' => $_POST['nombre'],
             'carrera' => $_POST['carrera'],
             'correo' => $_POST['correo'],
+            'telefono' => $_POST['telefono'],
             'contrasena' => $_POST['contrasena']
         );
 
@@ -688,8 +687,7 @@ class Controlador
         //Se notifca al usuario como se realizo en los metodos pasados y si se borro exitosamente lo redirecciona a la pagina principal en donde estan listados todos los usuarios
         if($respuesta == "success"){
             echo '<script> 
-                    alert("Tutor agregado correctamente");
-                    window.location.href = "index.php?action=tutores";
+                    window.location.href = "index.php?action=tutores&msg=Tutor agregado correctamente";
                   </script>';
         }else{
             echo '<script> alert("Error al guardar") </script>';
@@ -707,8 +705,7 @@ class Controlador
         //Se notifca al usuario como se realizo en los metodos pasados y si se borro exitosamente lo redirecciona a la pagina principal en donde estan listados todos los usuarios
         if($respuesta == "success"){
             echo '<script> 
-                    alert("Tutor eliminado correctamente");
-                    window.location.href = "index.php?action=tutores";
+                    window.location.href = "index.php?action=tutores&msg=Tutor eliminado correctamente";
                   </script>';
         }else{
             echo '<script> alert("Error al eliminar") </script>';
@@ -724,6 +721,7 @@ class Controlador
             'nombre' => $_POST['nombre'],
             'carrera' => $_POST['carrera'],
             'correo' => $_POST['correo'],
+            'telefono' => $_POST['telefono'],
             'contrasena' => $_POST['contrasena']
         );
 
@@ -733,8 +731,7 @@ class Controlador
         //Se notifca al usuario como se realizo en los metodos pasados y si se borro exitosamente lo redirecciona a la pagina principal en donde estan listados todos los usuarios
         if($respuesta == "success"){
             echo '<script> 
-                    alert("Tutor actualizado correctamente");
-                    window.location.href = "index.php?action=tutores";
+                    window.location.href = "index.php?action=tutores&msg=Tutor actualizado correctamente";
                   </script>';
         }else{
             echo '<script> alert("Error al actualizar") </script>';

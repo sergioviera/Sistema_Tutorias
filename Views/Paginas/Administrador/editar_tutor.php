@@ -3,11 +3,9 @@
 $controlador = new Controlador();
 
 //Se crean dos arreglos para recibir la informacion de las carreras y los tutores
-$datosCarreras = array();
 $datosTutores = array();
 
 //Se mandan llamar los metodos que traen estos datos, estos retornan un arreglo asociativo, esta informacion sera desplegada en los campos del formulario en donde se necesite mostrar los datos de la tabla que existen
-$datosCarreras = $controlador -> obtenerDatosCarreras();
 $datosTutores = $controlador -> obtenerDatosTutores();
 
 
@@ -23,8 +21,10 @@ for($i=0; $i < count($datosTutores); $i++ ){
 
         $numero_empleado = $datosTutores[$i]['numero_empleado'];
         $nombre = $datosTutores[$i]['nombre'];
+        $carrera = $datosTutores[$i]['carrera'];
         $correo = $datosTutores[$i]['correo'];
         $contrasena = $datosTutores[$i]['contrasena'];
+        $telefono = $datosTutores[$i]['telefono'];
         
     }
 }
@@ -33,11 +33,8 @@ for($i=0; $i < count($datosTutores); $i++ ){
 ?>
 
 <section class="content-header">
-    <h1>
-        Editar Tutor
-        
-    </h1>
-     <br>
+    <h1>Editar Tutor</h1>
+    <br>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Tutores </a></li>
         <li class="active">Editar Tutor</li>
@@ -69,7 +66,7 @@ for($i=0; $i < count($datosTutores); $i++ ){
                         
                         
                         <div class="form-group">
-                            <label for="numero">Numero: </label>
+                            <label for="numero">Legajo: </label>
                             <input type="text" class="form-control" name="numero" placeholder="Numero del tutor" value="<?= $numero_empleado ?>">
                         </div>
 
@@ -81,19 +78,21 @@ for($i=0; $i < count($datosTutores); $i++ ){
                         <div class="form-group">    
                             <label for="carrera">Carrera: </label>
                             <select class="form-control" name="carrera">
-                                <?php
-
-                                    for($i = 0; $i < count($datosCarreras); $i++ ){
-                                        echo '<option value="'.$datosCarreras[$i]['carrera_id'].'"> '. $datosCarreras[$i]['nombre'] .' </option>';
-                                    }
-                                
-                                ?>
+                                <option <?php echo ($carrera == "Ingeniería Eléctrica")?'selected="selected"':'' ?>>Ingeniería Eléctrica</option>
+                                <option <?php echo ($carrera == "Ingeniería Mecánica")?'selected="selected"':'' ?>>Ingeniería Mecánica</option>
+                                <option <?php echo ($carrera == "Ingeniería Química")?'selected="selected"':'' ?>>Ingeniería Química</option>
+                                <option <?php echo ($carrera == "Ingeniería en Sistemas")?'selected="selected"':'' ?>>Ingeniería en Sistemas</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="correo">Correo: </label>
                             <input type="email" class="form-control" name="correo" placeholder="Correo del tutor" value="<?= $correo ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefono">Tel&eacute;fono: </label>
+                            <input type="text" class="form-control" name="telefono" placeholder="Telefono del tutor" value="<?= $telefono ?>">
                         </div>
 
                         <div class="form-group">

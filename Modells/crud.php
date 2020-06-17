@@ -627,12 +627,13 @@ class Datos extends Conexion{
         
         $pdo = Conexion::conectar();
         //Se prepara el query con el comando INSERT -> DE INSERTAR 
-        $stmt = $pdo->prepare("INSERT INTO tutores(numero_empleado, nombre, carrera, correo, contrasena) VALUES(:numero, :nombre, :carrera, :correo, MD5(:contrasena) )");
+        $stmt = $pdo->prepare("INSERT INTO tutores(numero_empleado, nombre, carrera, correo, telefono, contrasena) VALUES(:numero, :nombre, :carrera, :correo, :telefono, MD5(:contrasena) )");
         
         $stmt->bindParam(":numero",  $datosTutor['numero'] ,  PDO::PARAM_INT);
         $stmt->bindParam(":nombre",  $datosTutor['nombre'] ,  PDO::PARAM_STR);
-        $stmt->bindParam(":carrera",  $datosTutor['carrera'] ,  PDO::PARAM_INT);
+        $stmt->bindParam(":carrera",  $datosTutor['carrera'] ,  PDO::PARAM_STR);
         $stmt->bindParam(":correo",  $datosTutor['correo'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":telefono",  $datosTutor['telefono'] ,  PDO::PARAM_STR);
         $stmt->bindParam(":contrasena",  $datosTutor['contrasena'] ,  PDO::PARAM_STR);
 
         if($stmt->execute() ){
@@ -663,12 +664,13 @@ class Datos extends Conexion{
 
         $pdo = Conexion::conectar();
         
-        $stmt = $pdo->prepare("UPDATE tutores SET nombre = :nombre, carrera = :carrera, correo = :correo, contrasena = MD5(:contrasena) WHERE numero_empleado = :numero");
+        $stmt = $pdo->prepare("UPDATE tutores SET nombre = :nombre, carrera = :carrera, correo = :correo, telefono = :telefono, contrasena = MD5(:contrasena) WHERE numero_empleado = :numero");
         
         
         $stmt->bindParam(":nombre",  $datosTutor['nombre'] ,  PDO::PARAM_STR);
-        $stmt->bindParam(":carrera",  $datosTutor['carrera'] ,  PDO::PARAM_INT);
+        $stmt->bindParam(":carrera",  $datosTutor['carrera'] ,  PDO::PARAM_STR);
         $stmt->bindParam(":correo",  $datosTutor['correo'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":telefono",  $datosTutor['telefono'] ,  PDO::PARAM_STR);
         $stmt->bindParam(":contrasena",  $datosTutor['contrasena'] ,  PDO::PARAM_STR);
         $stmt->bindParam(":numero",  $datosTutor['numero'] ,  PDO::PARAM_INT);
 

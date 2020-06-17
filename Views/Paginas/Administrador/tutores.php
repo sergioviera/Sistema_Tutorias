@@ -3,11 +3,9 @@
 $controlador = new Controlador();
 
 //Se crean dos arreglos para recibir la informacion de las carreras y los tutores
-$datosCarreras = array();
 $datosTutores = array();
 
 //Se mandan llamar los metodos que traen estos datos, estos retornan un arreglo asociativo, esta informacion sera desplegada en los campos del formulario en donde se necesite mostrar los datos de la tabla que existen
-$datosCarreras = $controlador -> obtenerDatosCarreras();
 $datosTutores = $controlador -> obtenerDatosTutores();
 
 ?>
@@ -36,17 +34,22 @@ $datosTutores = $controlador -> obtenerDatosTutores();
         <hr>
     </div>
 
+    <!-- Alerta al usuario -->
+    <?php if(isset($_GET['msg'])){ ?>
+        <div id="msg" class="alert alert-success" role="alert"><?php echo $_GET['msg']?></div><script type="text/javascript">window.onload = function() {$("#msg").delay(2000).slideUp(200, function() {$(this).alert('close');});}</script>
+    <?php } ?>
+
     <!-- /.box-header -->
     <div class="box-body">
         <table id="tabla" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <!--Columnas de la cabecera de la tabla-->
-                    <th>Numero empleado</th>
+                    <th>Legajo</th>
                     <th>Nombre</th>
                     <th>Carrera</th>
                     <th>Correo</th>
-                    <th>Contrasena</th>
+                    <th>Teléfono</th>
                     <th>Modificar</th>
                     <th>Eliminar</th>
                 </tr>
@@ -59,22 +62,14 @@ $datosTutores = $controlador -> obtenerDatosTutores();
                         echo '<tr>';
                             echo '<td>'. $datosTutores[$i]['numero_empleado'] .'</td>';
                             echo '<td>'. $datosTutores[$i]['nombre'] .'</td>';
-
-                            for($j=0; $j < count($datosCarreras); $j++ ){
-
-                                if($datosCarreras[$j]['carrera_id'] == $datosTutores[$i]['carrera'] ){
-                                    echo '<td>'. $datosCarreras[$j]['nombre'] .'</td>';
-                                }
-
-                            }
-                            
+                            echo '<td>'. $datosTutores[$i]['carrera'] .'</td>';
                             echo '<td>'. $datosTutores[$i]['correo'] .'</td>';
-                            echo '<td>'. $datosTutores[$i]['contrasena'] .'</td>';
+                            echo '<td>'. $datosTutores[$i]['telefono'] .'</td>';
                             //Estos dos de abajo son los botones, se puede observar que estan listos para redirigir el flujo de la app a una pagina que se ellama editar y eliminar, teniendo un parametro el cual es la matricula del alumno a administrar
 
                             echo '<td> <a href="index.php?action=editar_tutor&id='.$datosTutores[$i]['numero_empleado'].'" type="button" class="btn btn-warning"> <i class="fas fa-edit"></i> </a> </td>';
                             
-                            echo '<td>  <a href="index.php?action=tutores&accion=eliminar_tutor&id='.$datosTutores[$i]['numero_empleado'].'" type="button"  class="btn btn-danger"> <i class="fas fa-trash-alt"></i>  </a> </td>';
+                            echo '<td>  <a onclick="eliminar('.$datosTutores[$i]['numero_empleado'].')" href="#" type="button"  class="btn btn-danger"> <i class="fas fa-trash-alt"></i>  </a> </td>';
                         echo '</tr>';
                     }
                 
@@ -87,6 +82,13 @@ $datosTutores = $controlador -> obtenerDatosTutores();
 </section>
 <!-- /.content -->
 
+<script type="text/javascript">
+    function eliminar(id){
+        if(confirm("Seguro que desea eliminar el tutor?")){
+            window.location.href = "index.php?action=tutores&accion=eliminar_tutor&id="+id;
+        }
+    }
+</script>
 <?php
 
 //Valida que se accion el metodo solo si se hace clic en el boton y no cuando se cargue pagina

@@ -3,18 +3,11 @@
 //Se instancia a un objeto de l clase controlador para que se manden llamar todos los metodo que cominican a la vista con el controlador
 $controlador = new Controlador();
 
-//Se crean dos arreglos para recibir la informacion de las carreras y los tutores
-$datosCarreras = array();
-
-//Se mandan llamar los metodos que traen estos datos, estos retornan un arreglo asociativo, esta informacion sera desplegada en los campos del formulario en donde se necesite mostrar los datos de la tabla que existen
-$datosCarreras = $controlador -> obtenerDatosCarreras();
-
 ?>
 
 <section class="content-header">
     <h1>
         Agregar Tutor
-        
     </h1>
         <br>
     <ol class="breadcrumb">
@@ -57,19 +50,22 @@ $datosCarreras = $controlador -> obtenerDatosCarreras();
                     <div class="form-group">    
                         <label for="carrera">Carrera: </label>
                         <select class="form-control" name="carrera">
-                            <?php
-
-                                for($i = 0; $i < count($datosCarreras); $i++ ){
-                                    echo '<option value="'.$datosCarreras[$i]['carrera_id'].'"> '. $datosCarreras[$i]['nombre'] .' </option>';
-                                }
-                            
-                            ?>
+                            <option>Ingeniería Eléctrica</option>
+                            <option>Ingeniería Mecánica</option>
+                            <option>Ingeniería Química</option>
+                            <option>Ingeniería en Sistemas</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="correo">Correo: </label>
                         <input type="email" class="form-control" name="correo" placeholder="Correo del tutor">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="telefono">Tel&eacute;fono: </label>
+                        <input type="text" class="form-control" name="telefono" placeholder="Telefono del tutor">
                     </div>
 
                     <div class="form-group">
