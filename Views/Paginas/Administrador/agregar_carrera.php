@@ -1,12 +1,12 @@
 <section class="content-header">
     <h1>
-        Agregar Carrera
+        Agregar Escuela
         
     </h1>
      <br>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Carreras</a></li>
-        <li class="active">Agregar Carrera</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Escuelas</a></li>
+        <li class="active">Agregar Escuela</li>
     </ol>
     <div class="box box-primary">
            
@@ -16,7 +16,7 @@
               <div class="box-body">
 
                 <div class="form-group">
-                  <label for="nombre">Nombre de la carrera</label>
+                  <label for="nombre">Nombre de la Escuela</label>
                   <input type="text" class="form-control" id="nombre" placeholder="Escribe nombre de la carrera" name="nombre">
                 </div>
 

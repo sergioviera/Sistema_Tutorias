@@ -77,7 +77,7 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fas fa-graduation-cap"> </i> 
-                    <span>Carreras</span>
+                    <span>Escuelas</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -86,12 +86,12 @@
                     <li>
                         <a href="index.php?action=carreras">
                             
-                            <i class="fas fa-list-ol"></i> Lista de carreras
+                            <i class="fas fa-list-ol"></i> Lista de escuelas
                         </a>
                     </li>
                     <li>
                     <a href="index.php?action=agregar_carrera">
-                            <i class="fas fa-plus-square"></i> Agregar carrera
+                            <i class="fas fa-plus-square"></i> Agregar escuela
                         </a>
                     </li>
                 </ul>

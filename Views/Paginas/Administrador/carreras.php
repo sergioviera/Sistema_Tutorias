@@ -11,12 +11,12 @@
 
 <section class="content-header">
     <h1>
-        Carreras
+        Escuelas
     </h1>
     
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Carrera </a></li>
-        <li class="active"> Lista de Carreras </li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Escuela </a></li>
+        <li class="active"> Lista de Escuelas </li>
     </ol>
 
 </section>
@@ -30,7 +30,7 @@
 <div class="box">
 
     <div class="box-header">
-        <a href="index.php?action=agregar_carrera" class="btn btn-primary " > <i class="fas fa-plus-square"></i> Agregar nueva carrera </a>
+        <a href="index.php?action=agregar_carrera" class="btn btn-primary " > <i class="fas fa-plus-square"></i> Agregar nueva escuela </a>
         <hr>
     </div>
 

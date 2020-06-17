@@ -5,13 +5,13 @@
 ?>
 <section class="content-header">
     <h1>
-        Editar Carrera
+        Editar Escuela
         
     </h1>
      <br>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Carreras</a></li>
-        <li class="active">Editar Carrera</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Escuelas</a></li>
+        <li class="active">Editar Escuela</li>
     </ol>
     <div class="box box-primary">
            
@@ -21,11 +21,11 @@
               <div class="box-body">
 
                 <div class="form-group">
-                  <label for="carrera_id">Id de la carrera</label>
+                  <label for="carrera_id">Id de la escuela</label>
                   <input type="text" name="carrera_id" value="<?= $datosCarrera[0]['carrera_id'] ?>" disabled>
                 </div>
                 <div class="form-group">
-                  <label for="nombre">Nombre de la carrera</label>
+                  <label for="nombre">Nombre de la escuela</label>
                   <input type="text" placeholder="Escribe nombre de la carrera" name="nombre" value="<?= $datosCarrera[0]['nombre'] ?>" required>
                 </div>
 
