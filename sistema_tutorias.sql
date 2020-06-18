@@ -40,18 +40,10 @@ CREATE TABLE `alumnos` (
   `carrera` int(11) DEFAULT NULL,
   `situacion` varchar(20) NOT NULL,
   `correo` varchar(50) NOT NULL,
+  `telefono` varchar(50) DEFAULT NULL,
   `tutor_id` int(11) DEFAULT NULL,
   `foto` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `alumnos`
---
-
-INSERT INTO `alumnos` (`matricula`, `nombre`, `carrera`, `situacion`, `correo`, `tutor_id`, `foto`) VALUES
-('1530002', 'Moises MagaÃ±a Fdz', 1, 'Regular', '1530002@upv.edu.mx', 1, '1530002.png'),
-('1530006', 'Froylan Melquiades Wbario Mtz', 1, 'Regular', '1530006@upv.edu.mx', 1, '1530006.png'),
-('1530277', 'Luis Torres Grimaldo', 1, 'Regular', '1530277@upv.edu.mx', 1, '1530277.jpg');
 
 -- --------------------------------------------------------
 
@@ -69,11 +61,12 @@ CREATE TABLE `carreras` (
 --
 
 INSERT INTO `carreras` (`carrera_id`, `nombre`) VALUES
-(1, 'ITI'),
-(2, 'PYMES'),
-(3, 'IM'),
-(4, 'ITM'),
-(5, 'ISA');
+(1, 'Escuela Nº22 - Adela Aguiar'),
+(2, 'Escuela N°1 Capitán Hipólito Bouchard'),
+(3, 'Escuela Nº7 - John F. Kennedy'),
+(4, 'Escuela 13 Luis Costa'),
+(5, 'Escuela Normal N° 6 '),
+(6, 'Escuela Nº16 - General José De San Martín ');
 
 -- --------------------------------------------------------
 
@@ -88,18 +81,8 @@ CREATE TABLE `sesiones` (
   `hora` varchar(10) NOT NULL,
   `tipo` varchar(15) NOT NULL,
   `tema` int(11) DEFAULT NULL,
-  `observaciones` text
+  `observaciones` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `sesiones`
---
-
-INSERT INTO `sesiones` (`sesion_id`, `tutor`, `fecha`, `hora`, `tipo`, `tema`, `observaciones`) VALUES
-(1, 1, '2018-10-23', '9:30 PM', 'Individual', 1, 'ObservaciÃ³n de la tutoria del dia 2018-10-23 con los alumno Moises MagaÃ±a'),
-(2, 1, '2018-10-25', '9:30 PM', 'Individual', 1, 'Sesion de tutoria el dia 2018-10-25 con Froylan Melquiades'),
-(3, 1, '2018-10-31', '9:30 PM', 'Individual', 1, 'Sesion de tutoria del dia 2018-10-31 con el alumnos Luis Torres'),
-(4, 1, '2018-10-31', '9:30 PM', 'Individual', 1, 'Ejemplo de una tutoria grupal');
 
 -- --------------------------------------------------------
 
@@ -111,18 +94,6 @@ CREATE TABLE `sesion_alumnos` (
   `sesion_id` int(10) DEFAULT NULL,
   `matricula` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `sesion_alumnos`
---
-
-INSERT INTO `sesion_alumnos` (`sesion_id`, `matricula`) VALUES
-(1, '1530002'),
-(2, '1530006'),
-(3, '1530277'),
-(4, '1530002'),
-(4, '1530006'),
-(4, '1530277');
 
 -- --------------------------------------------------------
 
@@ -142,7 +113,8 @@ CREATE TABLE `sesion_tema` (
 INSERT INTO `sesion_tema` (`tema_id`, `tema_nombre`) VALUES
 (1, 'Personales'),
 (2, 'Financieros'),
-(3, 'Drogas');
+(3, 'Uso de tecnología'),
+(4, 'Limitación de recursos');
 
 -- --------------------------------------------------------
 
@@ -153,8 +125,9 @@ INSERT INTO `sesion_tema` (`tema_id`, `tema_nombre`) VALUES
 CREATE TABLE `tutores` (
   `numero_empleado` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `carrera` int(11) DEFAULT NULL,
+  `carrera` varchar(50) DEFAULT NULL,
   `correo` varchar(50) NOT NULL,
+  `telefono` varchar(50) DEFAULT NULL,
   `contrasena` char(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -162,8 +135,8 @@ CREATE TABLE `tutores` (
 -- Volcado de datos para la tabla `tutores`
 --
 
-INSERT INTO `tutores` (`numero_empleado`, `nombre`, `carrera`, `correo`, `contrasena`) VALUES
-(1, 'Tutor de ejemplo', 1, 'tutor@tutor.com', '1f6f42334e1709a4e0f9922ad789912b');
+INSERT INTO `tutores` (`numero_empleado`, `nombre`, `carrera`, `correo`, `telefono`, `contrasena`) VALUES
+(1, 'Manuel Belgrano', 'Ingeniería en Sistemas', 'tutor@tutor.com', '03489-420400', '1f6f42334e1709a4e0f9922ad789912b');
 
 -- --------------------------------------------------------
 
@@ -184,7 +157,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`usuario_id`, `nombre`, `rol`, `correo`, `contrasena`) VALUES
-(1, 'Administrador', 'Oficina Tutoria', 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3');
+(1, 'Administrador', 'Administrador', 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3');
 
 --
 -- Índices para tablas volcadas
@@ -202,7 +175,8 @@ ALTER TABLE `alumnos`
 -- Indices de la tabla `carreras`
 --
 ALTER TABLE `carreras`
-  ADD PRIMARY KEY (`carrera_id`);
+  ADD PRIMARY KEY (`carrera_id`),
+  ADD KEY `lala` (`nombre`(10));
 
 --
 -- Indices de la tabla `sesiones`
@@ -229,8 +203,7 @@ ALTER TABLE `sesion_tema`
 -- Indices de la tabla `tutores`
 --
 ALTER TABLE `tutores`
-  ADD PRIMARY KEY (`numero_empleado`),
-  ADD KEY `carrera` (`carrera`);
+  ADD PRIMARY KEY (`numero_empleado`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -246,25 +219,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `carreras`
 --
 ALTER TABLE `carreras`
-  MODIFY `carrera_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `carrera_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `sesiones`
 --
 ALTER TABLE `sesiones`
-  MODIFY `sesion_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `sesion_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `sesion_tema`
 --
 ALTER TABLE `sesion_tema`
-  MODIFY `tema_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `tema_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
@@ -290,12 +263,6 @@ ALTER TABLE `sesiones`
 ALTER TABLE `sesion_alumnos`
   ADD CONSTRAINT `sesion_alumnos_ibfk_1` FOREIGN KEY (`sesion_id`) REFERENCES `sesiones` (`sesion_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `sesion_alumnos_ibfk_2` FOREIGN KEY (`matricula`) REFERENCES `alumnos` (`matricula`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `tutores`
---
-ALTER TABLE `tutores`
-  ADD CONSTRAINT `tutores_ibfk_1` FOREIGN KEY (`carrera`) REFERENCES `carreras` (`carrera_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
