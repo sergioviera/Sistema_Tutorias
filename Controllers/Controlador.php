@@ -49,23 +49,24 @@ class Controlador
     public function iniciarSesion()
     {
 
-        if( isset($_POST['correo']) && isset( $_POST['contrasena'] ) && isset($_POST['tipoUsuario']) )
+        if( isset($_POST['correo']) && isset( $_POST['contrasena'] ) )
         {
 
             $datos = array( 'correo'      => $_POST['correo'],
-                            'contrasena'  => $_POST['contrasena'],
-                            'tipoUsuario' => $_POST['tipoUsuario'] );
+                            'contrasena'  => $_POST['contrasena'] );
             
-            if($datos['tipoUsuario'] == 'Administrador' ){
-                $respuesta = Datos::validarUsuario($datos, 'usuarios');
-                $tipoUsuario = $respuesta['rol'];
-                $idUsuario = $respuesta['usuario_id'];
-            }else{
-                $respuesta = Datos::validarUsuario($datos, 'tutores');
+            $respuesta = Datos::validarUsuario($datos, 'tutores');
+
+            if( $respuesta ) {
                 $tipoUsuario = 'Tutor';
                 $idUsuario = $respuesta['numero_empleado'];
+            }else{
+                $respuesta = Datos::validarUsuario($datos, 'usuarios');
+                $tipoUsuario = 'Administrador';
+                $idUsuario = $respuesta['usuario_id'];
             }
-           
+
+
             if( $respuesta )
             {
                 session_start();
@@ -79,8 +80,7 @@ class Controlador
                 //echo 'Bienvenido al sistema';
             }else
             {
-                echo '<script> alert("Correo o contraseña incorrectos") </script>';
-                header("location:index.php");
+                header("location:index.php?msg=Correo o contraseña incorrectos");
                 //echo 'Correo o contraseña incorrecto';
             }
 

@@ -28,7 +28,11 @@
 <div class="login-box">
   
     <div class="login-box-body">
-        
+        <!-- Alerta al usuario -->
+        <?php if(isset($_GET['msg'])){ ?>
+            <div id="msg" class="alert alert-danger" role="alert"><?php echo $_GET['msg']?></div><script type="text/javascript">window.onload = function() {$("#msg").delay(4000).slideUp(200, function() {$(this).alert('close');});}</script>
+        <?php } ?>
+
         <img class="center-block img-circle" src="Public/img/logo.png" width="150px" height="150px">
         <p class="login-box-msg " ><b><h3 align="center">Sistema de Tutorias</h3><b></p>
         <!--<p class="login-box-msg"><b>INICIO DE SESIÓN<b></p>-->
@@ -42,13 +46,6 @@
             <div class="form-group has-feedback">
                 <input name= "contrasena" type="password" class="form-control" placeholder="Contraseña">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-
-            <div class="form-group has-feedback">
-                <select name="tipoUsuario" class="form-control">
-                    <option> Tutor </option>
-                    <option> Administrador </option>
-                </select>
             </div>
 
             <div class="row">
