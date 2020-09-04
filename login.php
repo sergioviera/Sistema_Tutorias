@@ -34,8 +34,17 @@
         <?php } ?>
 
         <img class="center-block img-circle" src="Public/img/logo.png" width="150px" height="150px">
-        <p class="login-box-msg " ><b><h3 align="center">Sistema de Tutorias</h3><b></p>
+        <p class="login-box-msg " ><b><h3 align="center">Sistema de Tutorias</h3></b></p>
         <!--<p class="login-box-msg"><b>INICIO DE SESIÓN<b></p>-->
+        <div class="row">
+            <div class="col-md-6">
+                <a href="inscripcion-tutor.php" class="btn btn-success">Quiero ser Tutor!</a>
+            </div>
+            <div class="col-md-6">
+                <a href="inscripcion-alumno.php" class="btn btn-warning">Necesito un Tutor!</a>
+            </div>
+        </div>
+        <br/>
         <form  method="post">
 
             <div class="form-group has-feedback">

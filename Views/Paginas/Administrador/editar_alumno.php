@@ -47,7 +47,7 @@ $datosAlumno = $controlador -> obtenerDatosAlumno();
                 <div class="box-body">
 
                 <div class="form-group" style="text-align: center;">
-                    <img src="fotos/<?= $datosAlumno[0]['foto'] ?>" name="fotoActual" height="200px" width="200px"/> 
+                    <img src="fotos/<?= $datosAlumno[0]['foto'] ?>" name="fotoActual" height="200px" width="200px"/>
                 </div>
 
                 <input type="hidden" name="fotoActual" value="<?= $datosAlumno[0]['foto'] ?>">

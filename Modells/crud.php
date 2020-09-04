@@ -250,7 +250,7 @@ class Datos extends Conexion{
     public function traerDatosAlumno($matricula){
 
         //Se prepara el query
-        $stmt = Conexion::conectar()->prepare("SELECT t1.matricula as matricula, t1.nombre as alumno, t2.nombre as carrera, t1.situacion as situacion, t1.correo as correo, t1.telefono as telefono, t3.nombre as tutor,t1.foto as foto FROM alumnos as t1 INNER JOIN carreras AS t2 ON t2.carrera_id = t1.carrera INNER JOIN tutores AS t3 ON t3.numero_empleado = t1.tutor_id WHERE matricula = :matricula");
+        $stmt = Conexion::conectar()->prepare("SELECT t1.matricula as matricula, t1.nombre as alumno, t2.nombre as carrera, t1.situacion as situacion, t1.correo as correo, t1.telefono as telefono, t3.nombre as tutor,t1.foto as foto FROM alumnos as t1 INNER JOIN carreras AS t2 ON t2.carrera_id = t1.carrera LEFT JOIN tutores AS t3 ON t3.numero_empleado = t1.tutor_id WHERE matricula = :matricula");
 
         //Se pasan los parametros de ese query
         $stmt->bindParam(":matricula", $matricula , PDO::PARAM_STR);
@@ -286,6 +286,33 @@ class Datos extends Conexion{
         $stmt->bindParam(":foto", $datosAlumno["foto"], PDO::PARAM_STR);
 
         print_r($datosAlumno);
+        //Se ejecuta dicha insercion y se notifica al controlador para que este le notifique a las vistas necesarias
+        if($stmt->execute()){
+            //$stmt->close();
+            return "success";
+        }else{
+            //$stmt->close();
+            return "error";
+        }
+
+    }
+
+    //Funcion que almacena todos los datos de un alumno en su respectiva tabla, tabmien pasada por parametro (el nombre)
+    public function inscribirAlumno($datosAlumno, $tabla){
+
+        //Se prepara el query con el comando INSERT -> DE INSERTAR 
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(matricula, nombre, carrera, situacion, correo, telefono, foto) VALUES(:matricula, :nombre, :carrera_id, :situacion, :correo, :telefono, :foto) ");
+        
+        //Se colocan todos sus parametros especificados, y se relacionan con los datos pasdaos por parametro a esta funcion desde el controladro en modo de array asociativo
+        //Asi como se especifica como deben ser tratados (tipo de dato)
+        $stmt->bindParam(":matricula", $datosAlumno["matricula"] , PDO::PARAM_STR);
+        $stmt->bindParam(":nombre", $datosAlumno["nombre"], PDO::PARAM_STR);
+        $stmt->bindParam(":carrera_id", $datosAlumno["carrera"], PDO::PARAM_INT);
+        $stmt->bindParam(":situacion", $datosAlumno["situacion"], PDO::PARAM_STR);
+        $stmt->bindParam(":correo", $datosAlumno["correo"], PDO::PARAM_STR);
+        $stmt->bindParam(":telefono", $datosAlumno["telefono"], PDO::PARAM_STR);
+        $stmt->bindParam(":foto", $datosAlumno["foto"], PDO::PARAM_STR);
+
         //Se ejecuta dicha insercion y se notifica al controlador para que este le notifique a las vistas necesarias
         if($stmt->execute()){
             //$stmt->close();
@@ -635,6 +662,35 @@ class Datos extends Conexion{
         $stmt->bindParam(":correo",  $datosTutor['correo'] ,  PDO::PARAM_STR);
         $stmt->bindParam(":telefono",  $datosTutor['telefono'] ,  PDO::PARAM_STR);
         $stmt->bindParam(":contrasena",  $datosTutor['contrasena'] ,  PDO::PARAM_STR);
+
+        if($stmt->execute() ){
+            return "success";
+        }else{
+            return "error";
+        }
+
+
+    }
+    public function inscribirTutor($datosTutor){
+
+        
+        $pdo = Conexion::conectar();
+        //Se prepara el query con el comando INSERT -> DE INSERTAR 
+        $stmt = $pdo->prepare("INSERT INTO tutores(numero_empleado, nombre, dni, correo, telefono, carrera, nivel, promAplazo, regularizadas, aprobadas, anioInicio, comentarios) VALUES(:numero, :nombre, :dni, :correo, :telefono, :carrera, :nivel, :promAplazo, :regularizadas, :aprobadas, :anioInicio, :comentarios )");
+        
+
+        $stmt->bindParam(":numero",  $datosTutor['numero'] ,  PDO::PARAM_INT);
+        $stmt->bindParam(":nombre",  $datosTutor['nombre'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":dni",  $datosTutor['dni'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":correo",  $datosTutor['correo'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":telefono",  $datosTutor['telefono'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":carrera",  $datosTutor['carrera'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":nivel",  $datosTutor['nivel'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":promAplazo",  $datosTutor['promAplazo'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":regularizadas",  $datosTutor['regularizadas'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":aprobadas",  $datosTutor['aprobadas'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":anioInicio",  $datosTutor['anioInicio'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":comentarios",  $datosTutor['comentarios'] ,  PDO::PARAM_STR);
 
         if($stmt->execute() ){
             return "success";
