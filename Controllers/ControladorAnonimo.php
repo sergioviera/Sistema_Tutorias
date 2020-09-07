@@ -4,7 +4,7 @@ require_once('Modells/crud.php');
 class ControladorAnonimo
 {
 	public function inscribirTutor(){
-
+$hint = "ControladorAnonimo-inscribirTutor:";
         $datosTutor = array(
             'numero' => $_POST['numero'], //numero de legajo
             'nombre' => $_POST['nombre'], //nombre del tutor
@@ -21,15 +21,16 @@ class ControladorAnonimo
         );
 
 
+$hint = $hint." 1 ";
         //print_r($datosTutor);
 
         $respuesta = Datos::inscribirTutor($datosTutor);
-
+$hint = $hint." 2 ";
         //Se notifca al usuario como se realizo en los metodos pasados y si se borro exitosamente lo redirecciona a la pagina principal en donde estan listados todos los usuarios
         if($respuesta == "success"){
             echo '<script> alert("Inscripto correctamente") </script>';
         }else{
-            echo '<script> alert("Error al guardar") </script>';
+            echo '<script> alert("Error al guardar - '.$respuesta.$hint'") </script>';
         }
 
     }
