@@ -672,59 +672,28 @@ class Datos extends Conexion{
 
     }
     public function inscribirTutor($datosTutor){
-    $hint = "<h2>inscribirTutor</h2>";
         $pdo = Conexion::conectar();
         //Se prepara el query con el comando INSERT -> DE INSERTAR 
-    $hint = $hint . "prepare:";
+
         $stmt = $pdo->prepare("INSERT INTO tutores(numero_empleado, nombre, dni, correo, telefono, carrera, nivel, promAplazo, regularizadas, aprobadas, anioInicio, comentarios) VALUES(:numero, :nombre, :dni, :correo, :telefono, :carrera, :nivel, :promAplazo, :regularizadas, :aprobadas, :anioInicio, :comentarios )");
-        $hint = $hint . print_r($stmt).'<br>';
-        // prepare() can fail because of syntax errors, missing privileges, ....
-if ( false===$stmt ) {
-  // and since all the following operations need a valid/ready statement object
-  // it doesn't make sense to go on
-  // you might want to use a more sophisticated mechanism than die()
-  // but's it's only an example
-  die('prepare() failed: ' . htmlspecialchars($mysqli->error));
-}
-    $hint = $hint . "<h2>bindParam</h2>";
 
-        $rc = $stmt->bindParam(":numero",  $datosTutor['numero'] ,  PDO::PARAM_INT);
-        $hint = $hint .'numero:'. print_r($rc).'<br>';
-        $rc = $stmt->bindParam(":nombre",  $datosTutor['nombre'] ,  PDO::PARAM_STR);
-        $hint = $hint .'nombre:'. print_r($rc).'<br>';
-        $rc = $stmt->bindParam(":dni",  $datosTutor['dni'] ,  PDO::PARAM_STR);
-        $hint = $hint .'dni:'. print_r($rc).'<br>';
-        $rc = $stmt->bindParam(":correo",  $datosTutor['correo'] ,  PDO::PARAM_STR);
-        $hint = $hint .'correo:'. print_r($rc).'<br>';
-        $rc = $stmt->bindParam(":telefono",  $datosTutor['telefono'] ,  PDO::PARAM_STR);
-        $hint = $hint .'telefono:'. print_r($rc).'<br>';
-        $rc = $stmt->bindParam(":carrera",  $datosTutor['carrera'] ,  PDO::PARAM_STR);
-        $hint = $hint .'carrera:'. print_r($rc).'<br>';
-        $rc = $stmt->bindParam(":nivel",  $datosTutor['nivel'] ,  PDO::PARAM_STR);
-        $hint = $hint .'nivel:'. print_r($rc).'<br>';
-        $rc = $stmt->bindParam(":promAplazo",  $datosTutor['promAplazo'] ,  PDO::PARAM_STR);
-        $hint = $hint .'promAplazo:'. print_r($rc).'<br>';
-        $rc = $stmt->bindParam(":regularizadas",  $datosTutor['regularizadas'] ,  PDO::PARAM_STR);
-        $hint = $hint .'regularizadas:'. print_r($rc).'<br>';
-        $rc = $stmt->bindParam(":aprobadas",  $datosTutor['aprobadas'] ,  PDO::PARAM_STR);
-        $hint = $hint .'aprobadas:'. print_r($rc).'<br>';
-        $rc = $stmt->bindParam(":anioInicio",  $datosTutor['anioInicio'] ,  PDO::PARAM_STR);
-        $hint = $hint .'anioInicio:'. print_r($rc).'<br>';
-        $rc = $stmt->bindParam(":comentarios",  $datosTutor['comentarios'] ,  PDO::PARAM_STR);
-        $hint = $hint .'comentarios:'. print_r($rc).'<br>';
-
-// bind_param() can fail because the number of parameter doesn't match the placeholders in the statement
-// or there's a type conflict(?), or ....
-if ( false===$rc ) {
-  // again execute() is useless if you can't bind the parameters. Bail out somehow.
-  die('bind_param() failed: ' . htmlspecialchars($stmt->error));
-}
-    $hint = $hint . "FIN<BR>";
+        $stmt->bindParam(":numero",  $datosTutor['numero'] ,  PDO::PARAM_INT);
+        $stmt->bindParam(":nombre",  $datosTutor['nombre'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":dni",  $datosTutor['dni'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":correo",  $datosTutor['correo'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":telefono",  $datosTutor['telefono'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":carrera",  $datosTutor['carrera'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":nivel",  $datosTutor['nivel'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":promAplazo",  $datosTutor['promAplazo'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":regularizadas",  $datosTutor['regularizadas'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":aprobadas",  $datosTutor['aprobadas'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":anioInicio",  $datosTutor['anioInicio'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":comentarios",  $datosTutor['comentarios'] ,  PDO::PARAM_STR);
 
         if( $stmt->execute() ){
-            return "success".$hint;
+            return "success";
         }else{
-            return $hint."<h2>Resultado</h2>ErrorInfo(): ".print_r($stmt->errorInfo())."<br>Error Code: ".$stmt->errorCode()."<br>Error: ". htmlspecialchars($stmt->error());
+            return "error";
         }
 
     }

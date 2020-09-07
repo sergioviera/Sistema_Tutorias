@@ -4,7 +4,6 @@ require_once('Modells/crud.php');
 class ControladorAnonimo
 {
 	public function inscribirTutor(){
-$hint = "<h2>ControladorAnonimo-inscribirTutor</h2>".'{numero:'. $_POST['numero'].' ,nombre:'.$_POST['nombre'].', dni:'.$_POST['dni'].', correo:'.$_POST['correo'].' ,telefono:'.$_POST['telefono'].' ,carrera:'.$_POST['carrera'].' ,nivel:'.$_POST['nivel'].' ,promAplazo:'.$_POST['promAplazo'].' ,regularizadas:'.$_POST['regularizadas'].' ,aprobadas:'.$_POST['aprobadas'].' ,anioInicio:'.$_POST['anioInicio'].' ,comentarios:'.$_POST['comentarios'].'}<br>';
 
         $datosTutor = array(
             'numero' => $_POST['numero'], //numero de legajo
@@ -22,16 +21,13 @@ $hint = "<h2>ControladorAnonimo-inscribirTutor</h2>".'{numero:'. $_POST['numero'
         );
 
 
-$hint = $hint."<h1>DatosTutor</h1>$datosTutor".print_r($datosTutor)."<br>";
-        //print_r($datosTutor);
-
         $respuesta = Datos::inscribirTutor($datosTutor);
-$hint = $hint."<h1>Respuesta</h1>$respuesta";
+
         //Se notifca al usuario como se realizo en los metodos pasados y si se borro exitosamente lo redirecciona a la pagina principal en donde estan listados todos los usuarios
         if($respuesta == "success"){
-            echo '<script> alert("Inscripto correctamente") </script>';
+            echo '<script> $("form").hide(); $(".alert").addClass("alert-success"); $("#msg").html("Te inscribiste correctamente. En breve nos pondremos en contacto para indicarte los pasos a seguir.") </script>';
         }else{
-            echo '<script> $("#msg").html("Error al guardar - '.$respuesta.$hint.'") </script>';
+            echo '<script> $(".alert").addClass("alert-error"); $("#msg").html("Error al guardar.") </script>';
         }
 
     }
