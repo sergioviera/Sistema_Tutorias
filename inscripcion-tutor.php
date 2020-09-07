@@ -54,6 +54,9 @@ $controlador = new ControladorAnonimo();
                 <h3 class="box-title">Por favor, ingrese sus datos para postularse como tutor. En breve nos comunicaremos para informarle sobre los pasos a seguir.</h3>
             </div>
 
+            <div id="msg" class="alert alert-secondary">
+                x
+            </div>
             <!-- /.box-header -->
             <!-- form start -->
             <form method="POST" autocomplete="off">
