@@ -30,7 +30,7 @@ $controlador = new ControladorAnonimo();
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
     <style type="text/css" media="screen">
-        body, input, select, h3{
+        body, input, select, h3, textarea{
             font-size: 150% !important;
             height: 150% !important;
         }
@@ -47,15 +47,25 @@ $controlador = new ControladorAnonimo();
         <?php } ?>
 
         <img class="center-block img-circle" src="Public/img/logo.png" width="150px" height="150px">
-        <p class="login-box-msg " ><b><h3 align="center">Registrarse como Tutor</h3></b></p>
+        <p class="login-box-msg " ><b><h2 align="center">Programa de Tutorias</h2></b></p>
         <div class="box box-primary">
-
-            <div class="box-header with-border">
-                <h3 class="box-title">Por favor, ingrese sus datos para postularse como tutor. En breve nos comunicaremos para informarle sobre los pasos a seguir.</h3>
-            </div>
-
             <div id="msg" class="alert" role="alert">
             </div>
+            <div class="box-header with-border">
+                <h3>Qu&eacute; se espera de un Tutor</h3>
+                <p>QUE DEMUESTRE ACTITUDES QUE POSIBILITEN LA RELACIÓN HONESTA, RICA Y EFICAZ CON LOS OTROS.</p>
+                <p>Se considera que todo tutor tendría que estar dotado por cualidades como:</p>
+                <ul>
+                    <li><b>Empat&iacute;a</b>, como capacidad para simpatizar, para ponerse en el lugar del otro, para hacer suyos los sentimientos del otro, para comprenderlo sin juzgarlo.</li>
+                    <li><b>Autenticidad</b>, que se refiere a la armonía y congruencia que debe haber entre lo que el  tutor dice y hace y lo que realmente es.</li>
+                    <li><b>Madurez</b>, que hace al tutor una persona flexible, capaz de comprender, asimilar ideas, adaptarse a situaciones nuevas y diferenciar lo que pertenece a la subjetividad, y lo convierte en una persona en búsqueda permanente del bien común; capaz de tomar decisiones y modificarlas cuando sea necesario.</li>
+                    <li><b>Responsabilidad o compromiso personal</b> para asumir riesgos, aceptar éxitos y fracasos, calcular consecuencias tanto para sí mismo como para sus estudiantes tutorados.</li>
+                    <li><b>Sociabilidad</b>, que implica estar capacitados para desarrollar en sí mismo y en los otros criterios y valores sociales.</li>
+                </ul>
+                <p>Si te sent&iacute;s capaz para participar de este proyecto, por favor, ingresá tus datos para postularse como Tutor. En breve nos comunicaremos para informarte sobre los pasos a seguir.</p>
+            </div>
+
+
             <!-- /.box-header -->
             <!-- form start -->
             <form method="POST" autocomplete="off">
@@ -90,10 +100,12 @@ $controlador = new ControladorAnonimo();
                     <div class="form-group">
                         <label for="carrera">Carrera: </label>
                         <select class="form-control" name="carrera">
-                            <option>Ingeniería Eléctrica</option>
-                            <option>Ingeniería Mecánica</option>
-                            <option>Ingeniería Química</option>
-                            <option>Ingeniería en Sistemas</option>
+                            <option>UTN-FRD - Ingeniería Eléctrica</option>
+                            <option>UTN-FRD - Ingeniería Mecánica</option>
+                            <option>UTN-FRD - Ingeniería Química</option>
+                            <option>UTN-FRD - Ingeniería en Sistemas</option>
+                            <option>Otra Institución/Carrera</option>}
+                            option
                         </select>
                     </div>
 

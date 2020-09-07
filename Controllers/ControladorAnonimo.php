@@ -27,7 +27,7 @@ class ControladorAnonimo
         if($respuesta == "success"){
             echo '<script> $("form").hide(); $(".alert").addClass("alert-success"); $("#msg").html("Te inscribiste correctamente. En breve nos pondremos en contacto para indicarte los pasos a seguir.") </script>';
         }else{
-            echo '<script> $(".alert").addClass("alert-error"); $("#msg").html("Error al guardar.") </script>';
+            echo '<script> $(".alert").addClass("alert-error"); $("#msg").html("Ocurrió un error al guardar. Puede ser que ya hayas sido inscripto anteriormente o que hayas ingresado mal tu legajo.") </script>';
         }
 
     }
