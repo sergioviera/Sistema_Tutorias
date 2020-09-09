@@ -45,14 +45,13 @@ $datosTutores = $controlador -> obtenerDatosTutores();
             <thead>
                 <tr>
                     <!--Columnas de la cabecera de la tabla-->
-                    <th>Legajo</th>
+                    <th>Fecha de Inscripci&oacute;n</th>
                     <th>Nombre</th>
                     <th>Carrera</th>
                     <th>Correo</th>
                     <th>Teléfono</th>
                     <th>Foto</th>
-                    <th>Modificar</th>
-                    <th>Eliminar</th>
+                    <th>Ver</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,7 +60,7 @@ $datosTutores = $controlador -> obtenerDatosTutores();
                     for($i=0; $i < count($datosTutores); $i++ ){
 
                         echo '<tr>';
-                            echo '<td>'. $datosTutores[$i]['numero_empleado'] .'</td>';
+                            echo '<td>'. $datosTutores[$i]['fecha_inscripcion'] .'</td>';
                             echo '<td>'. $datosTutores[$i]['nombre'] .'</td>';
                             echo '<td>'. $datosTutores[$i]['carrera'] .'</td>';
                             echo '<td>'. $datosTutores[$i]['correo'] .'</td>';
@@ -69,9 +68,8 @@ $datosTutores = $controlador -> obtenerDatosTutores();
                             echo '<td><img src="fotos/'. $datosTutores[$i]['foto'] .'" width="30px" height="30px"></td>';
                             //Estos dos de abajo son los botones, se puede observar que estan listos para redirigir el flujo de la app a una pagina que se ellama editar y eliminar, teniendo un parametro el cual es la matricula del alumno a administrar
 
-                            echo '<td> <a href="index.php?action=editar_tutor&id='.$datosTutores[$i]['numero_empleado'].'" type="button" class="btn btn-warning"> <i class="fas fa-edit"></i> </a> </td>';
+                            echo '<td> <a href="index.php?action=editar_tutor&id='.$datosTutores[$i]['numero_empleado'].'" type="button" class="btn btn-warning"> <i class="fas fa-address-card"></i> </a> </td>';
                             
-                            echo '<td>  <a onclick="eliminar('.$datosTutores[$i]['numero_empleado'].')" href="#" type="button"  class="btn btn-danger"> <i class="fas fa-trash-alt"></i>  </a> </td>';
                         echo '</tr>';
                     }
                 
