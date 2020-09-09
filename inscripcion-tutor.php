@@ -74,27 +74,27 @@ $controlador = new ControladorAnonimo();
 
                     <div class="form-group">
                         <label for="numero">N&uacute;mero de legajo: </label>
-                        <input type="text" class="form-control" name="numero" placeholder="Numero de legajo">
+                        <input type="text" class="form-control" name="numero" placeholder="Numero de legajo" required>
                     </div>
 
                     <div class="form-group">
                         <label for="nombre">Nombre Completo: </label>
-                        <input type="text" class="form-control" name="nombre" placeholder="Nombre completo">
+                        <input type="text" class="form-control" name="nombre" placeholder="Nombre completo" required>
                     </div>
 
                     <div class="form-group">
                         <label for="numero">DNI: </label>
-                        <input type="text" class="form-control" name="dni" placeholder="DNI">
+                        <input type="text" class="form-control" name="dni" placeholder="DNI" required>
                     </div>
 
                     <div class="form-group">
                         <label for="correo">Correo electrónico: </label>
-                        <input type="email" class="form-control" name="correo" placeholder="Correo electrónico">
+                        <input type="email" class="form-control" name="correo" placeholder="Correo electrónico" required>
                     </div>
 
                     <div class="form-group">
                         <label for="telefono">Tel&eacute;fono: </label>
-                        <input type="text" class="form-control" name="telefono" placeholder="Teléfono">
+                        <input type="text" class="form-control" name="telefono" placeholder="Teléfono" required>
                     </div>
 
                     <div class="form-group">
@@ -122,22 +122,22 @@ $controlador = new ControladorAnonimo();
 
                     <div class="form-group">
                         <label for="promAplazo">Promedio con aplazos:</label>
-                        <input type="text" class="form-control" name="promAplazo" placeholder="Promedio con aplazos">
+                        <input type="text" class="form-control" name="promAplazo" placeholder="Promedio con aplazos" required>
                     </div>
 
                     <div class="form-group">
                         <label for="regularizadas">Materias Regularizadas:</label>
-                        <input type="text" class="form-control" name="regularizadas" placeholder="Materias Regularizadas">
+                        <input type="text" class="form-control" name="regularizadas" placeholder="Materias Regularizadas" required>
                     </div>
 
                     <div class="form-group">
                         <label for="aprobadas">Materias Aprobadas:</label>
-                        <input type="text" class="form-control" name="aprobadas" placeholder="Materias Aprobadas">
+                        <input type="text" class="form-control" name="aprobadas" placeholder="Materias Aprobadas" required>
                     </div>
 
                     <div class="form-group">
                         <label for="anioInicio">A&ntilde;o de inicio:</label>
-                        <input type="text" class="form-control" name="anioInicio" placeholder="Año de inicio de la carrera">
+                        <input type="text" class="form-control" name="anioInicio" placeholder="Año de inicio de la carrera" required>
                     </div>
 
                     <div class="form-group">
@@ -148,7 +148,7 @@ $controlador = new ControladorAnonimo();
                     <!--Campo que subre la fotografia al servidor, lo coloca en una carpeta temporal desde donde se toma y se almacena en una carpeta especificada, para poder subir la imagen en el formulario se debe cambiar el encabezado a tipo  enctype="multipart/form-data" -->
                     <div class="form-group">
                         <label for="foto">Foto:</label> <br>
-                        <input type="file" class="form-control input-lg" name="foto"  />
+                        <input type="file" class="form-control input-lg" name="foto"   required />
                     </div>
 
                 </div>

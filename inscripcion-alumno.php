@@ -61,42 +61,17 @@ $datosCarreras = $controlador -> obtenerDatosCarreras();
 
                     <div class="form-group">
                         <label for="nombre">Nombre de la persona responsable:</label>
-                        <input type="text" class="form-control" name="nombreResponsable" placeholder="Nombre completo de la persona a cargo del alumno">
+                        <input type="text" class="form-control" name="nombreResponsable" placeholder="Nombre completo de la persona a cargo del alumno" required>
                     </div>
 
                     <div class="form-group">
                         <label for="matricula">DNI del estudiante:</label>
-                        <input type="number" class="form-control" name="matricula" placeholder="Ingrese el DNI">
+                        <input type="number" class="form-control" name="matricula" placeholder="Ingrese el DNI" required>
                     </div>
 
                     <div class="form-group">
                         <label for="nombre">Nombre del estudiante:</label>
-                        <input type="text" class="form-control" name="nombre" placeholder="Nombre completo del alumno">
-                    </div>
-
-                    <div class="form-group">    
-                        <label for="carrera">Colegio:</label>
-                        <select class="form-control" name="carrera">
-                            <?php
-
-                                for($i = 0; $i < count($datosCarreras); $i++ ){
-                                    echo '<option value="'.$datosCarreras[$i]['carrera_id'].'"> '. $datosCarreras[$i]['nombre'] .' </option>';
-                                }
-                            
-                            ?>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="situacion">Grado:</label>
-                        <select class="form-control" name="situacion">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                        </select>
+                        <input type="text" class="form-control" name="nombre" placeholder="Nombre completo del alumno" required>
                     </div>
 
                     <div class="form-group">
@@ -106,7 +81,7 @@ $datosCarreras = $controlador -> obtenerDatosCarreras();
 
                     <div class="form-group">
                         <label for="telefono">Tel&eacute;fono:</label>
-                        <input type="text" class="form-control" name="telefono" placeholder="Ingrese el telefono con prefijo">
+                        <input type="text" class="form-control" name="telefono" placeholder="Ingrese el telefono con prefijo" required>
                     </div>
 
                 </div>
