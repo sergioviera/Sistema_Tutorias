@@ -68,7 +68,7 @@ $controlador = new ControladorAnonimo();
 
             <!-- /.box-header -->
             <!-- form start -->
-            <form method="POST" autocomplete="off">
+            <form method="POST" autocomplete="off" enctype="multipart/form-data">
                 
                 <div class="box-body">
 
@@ -143,6 +143,12 @@ $controlador = new ControladorAnonimo();
                     <div class="form-group">
                         <label for="comentarios">Comentarios:</label>
                         <textarea class="form-control" name="comentarios"></textarea>
+                    </div>
+
+                    <!--Campo que subre la fotografia al servidor, lo coloca en una carpeta temporal desde donde se toma y se almacena en una carpeta especificada, para poder subir la imagen en el formulario se debe cambiar el encabezado a tipo  enctype="multipart/form-data" -->
+                    <div class="form-group">
+                        <label for="foto">Foto:</label> <br>
+                        <input type="file" class="form-control input-lg" name="foto"  />
                     </div>
 
                 </div>

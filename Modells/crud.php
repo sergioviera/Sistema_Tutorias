@@ -675,7 +675,7 @@ class Datos extends Conexion{
         $pdo = Conexion::conectar();
         //Se prepara el query con el comando INSERT -> DE INSERTAR 
 
-        $stmt = $pdo->prepare("INSERT INTO tutores(numero_empleado, nombre, dni, correo, telefono, carrera, nivel, promAplazo, regularizadas, aprobadas, anioInicio, comentarios) VALUES(:numero, :nombre, :dni, :correo, :telefono, :carrera, :nivel, :promAplazo, :regularizadas, :aprobadas, :anioInicio, :comentarios )");
+        $stmt = $pdo->prepare("INSERT INTO tutores(numero_empleado, nombre, dni, correo, telefono, carrera, nivel, promAplazo, regularizadas, aprobadas, anioInicio, comentarios, foto) VALUES(:numero, :nombre, :dni, :correo, :telefono, :carrera, :nivel, :promAplazo, :regularizadas, :aprobadas, :anioInicio, :comentarios, :foto )");
 
         $stmt->bindParam(":numero",  $datosTutor['numero'] ,  PDO::PARAM_INT);
         $stmt->bindParam(":nombre",  $datosTutor['nombre'] ,  PDO::PARAM_STR);
@@ -689,6 +689,7 @@ class Datos extends Conexion{
         $stmt->bindParam(":aprobadas",  $datosTutor['aprobadas'] ,  PDO::PARAM_STR);
         $stmt->bindParam(":anioInicio",  $datosTutor['anioInicio'] ,  PDO::PARAM_STR);
         $stmt->bindParam(":comentarios",  $datosTutor['comentarios'] ,  PDO::PARAM_STR);
+        $stmt->bindParam(":foto", $datosTutor["foto"], PDO::PARAM_STR);
 
         if( $stmt->execute() ){
             return "success";

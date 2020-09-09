@@ -19,6 +19,7 @@ $contrasena = "";
 for($i=0; $i < count($datosTutores); $i++ ){
     if($datosTutores[$i]['numero_empleado'] == $tutorAEditar ){
 
+        $foto = $datosTutores[$i]['foto'];
         $numero_empleado = $datosTutores[$i]['numero_empleado'];
         $nombre = $datosTutores[$i]['nombre'];
         $carrera = $datosTutores[$i]['carrera'];
@@ -63,7 +64,9 @@ for($i=0; $i < count($datosTutores); $i++ ){
                     
                     <div class="box-body">
 
-                        
+                        <div class="form-group" style="text-align: center;">
+                            <img src="fotos/<?= $foto ?>" name="fotoActual" height="200px" width="200px"/>
+                        </div>
                         
                         <div class="form-group">
                             <label for="numero">Legajo: </label>

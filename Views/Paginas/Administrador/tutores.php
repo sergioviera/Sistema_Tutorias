@@ -50,6 +50,7 @@ $datosTutores = $controlador -> obtenerDatosTutores();
                     <th>Carrera</th>
                     <th>Correo</th>
                     <th>Teléfono</th>
+                    <th>Foto</th>
                     <th>Modificar</th>
                     <th>Eliminar</th>
                 </tr>
@@ -65,6 +66,7 @@ $datosTutores = $controlador -> obtenerDatosTutores();
                             echo '<td>'. $datosTutores[$i]['carrera'] .'</td>';
                             echo '<td>'. $datosTutores[$i]['correo'] .'</td>';
                             echo '<td>'. $datosTutores[$i]['telefono'] .'</td>';
+                            echo '<td><img src="fotos/'. $datosTutores[$i]['foto'] .'" width="30px" height="30px"></td>';
                             //Estos dos de abajo son los botones, se puede observar que estan listos para redirigir el flujo de la app a una pagina que se ellama editar y eliminar, teniendo un parametro el cual es la matricula del alumno a administrar
 
                             echo '<td> <a href="index.php?action=editar_tutor&id='.$datosTutores[$i]['numero_empleado'].'" type="button" class="btn btn-warning"> <i class="fas fa-edit"></i> </a> </td>';

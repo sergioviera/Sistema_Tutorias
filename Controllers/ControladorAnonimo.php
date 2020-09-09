@@ -5,6 +5,23 @@ class ControladorAnonimo
 {
 	public function inscribirTutor(){
 
+        //Para saber el nombre de la foto se manda llamar esta funcion
+        $nombreArchivo = basename($_FILES['foto']['name']);
+        $matricula = $_POST['numero'];
+
+        if($nombreArchivo == "" ){
+            $nombreFoto = 'user';
+            $extension = 'png';
+        }else{
+            //Se concatena al nombre la carpeta en donde se guardaran todas las fotos cargadas por los usuarios
+            $directorio = 'fotos/' . $nombreArchivo;
+
+            $nombreFoto = $matricula;
+
+            //Para hacer algunas validaciones y el usuario por ejemplo no pase como foto una archivo pdf se extrae la extencion de la foto
+            $extension = pathinfo($directorio , PATHINFO_EXTENSION);            
+        }
+
         $datosTutor = array(
             'numero' => $_POST['numero'], //numero de legajo
             'nombre' => $_POST['nombre'], //nombre del tutor
@@ -17,8 +34,20 @@ class ControladorAnonimo
             'regularizadas' => $_POST['regularizadas'], //Materias regularizadas
             'aprobadas' => $_POST['aprobadas'], //materias aprobadas
             'anioInicio' => $_POST['anioInicio'], //año de inicio de la carrera
-            'comentarios' => $_POST['comentarios'] //comentarios
+            'comentarios' => $_POST['comentarios'], //comentarios
+            'foto' => $nombreFoto.'.'.$extension //El nombre de la foto de cada uusario sera el nombre de su matricula, para de esta forma llevar un control y que las fotos no se repiten y se sobreescriban
         );
+
+        if($nombreArchivo != ""){
+            //Aqui es donde se hace la validacion de el archivo sea una foto con extensiones de imagenes frecuentes y no un formato .docs o un pdf por ejemplo
+            if($extension != 'png' && $extension != 'jpg' && $extension != 'PNG' && $extension != 'JPG'){
+                echo '<script> alert("Error al subir el archivo, el formato no está permitido. Intenta con otro"); </script>';
+            }else{
+                //Una vez que se ha cargado la imagen a los archivos temporales de php, esta funcion la mueve de ahi y la coloca en la direccion donde se guardaran las fotos ya con el nombre presonalizado por cada usuario, que es su matricula
+                move_uploaded_file($_FILES['foto']['tmp_name'], 'fotos/'.$matricula . '.' . $extension);
+            }
+        }
+        //Despues de que se ha guardado la imagen en la carpeta, se manda llamar la funcion del modelo en la cual se pasan el objeto con los datos del formulario para ser guardado
 
 
         $respuesta = Datos::inscribirTutor($datosTutor);
