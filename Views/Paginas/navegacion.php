@@ -151,29 +151,6 @@
                     </li>
                 </ul>
             </li>
-            <!--OPCION DE USUARIOS-->
-            <li class="treeview">
-                <a href="#">
-                    <i class="fas fa-users"></i>
-                    <span>Usuarios</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="index.php?action=usuarios">
-                            
-                            <i class="fas fa-list-ol"></i> Lista de usuarios
-                        </a>
-                    </li>
-                    <li>
-                    <a href="index.php?action=agregar_usuario">
-                            <i class="fas fa-plus-square"></i> Agregar usuario
-                        </a>
-                    </li>
-                </ul>
-            </li>
             
         </ul>
     </section>

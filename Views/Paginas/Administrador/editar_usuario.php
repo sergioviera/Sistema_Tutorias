@@ -4,10 +4,7 @@
     $datosUsuario = $controlador->obtenerDatosUsuarioId();//Obtener los datos del usuario
 ?>
 <section class="content-header">
-    <h1>
-        Editar Usuario
-        
-    </h1>
+    <h1>Editar Usuario</h1>
      <br>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Usuarios</a></li>
