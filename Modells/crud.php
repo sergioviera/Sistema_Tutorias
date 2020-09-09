@@ -301,7 +301,7 @@ class Datos extends Conexion{
     public function inscribirAlumno($datosAlumno, $tabla){
 
         //Se prepara el query con el comando INSERT -> DE INSERTAR 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(matricula, nombre, carrera, situacion, correo, telefono, foto) VALUES(:matricula, :nombre, :carrera_id, :situacion, :correo, :telefono, :foto) ");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(matricula, nombre, carrera, situacion, correo, telefono) VALUES(:matricula, :nombre, :carrera_id, :situacion, :correo, :telefono) ");
         
         //Se colocan todos sus parametros especificados, y se relacionan con los datos pasdaos por parametro a esta funcion desde el controladro en modo de array asociativo
         //Asi como se especifica como deben ser tratados (tipo de dato)
@@ -311,7 +311,6 @@ class Datos extends Conexion{
         $stmt->bindParam(":situacion", $datosAlumno["situacion"], PDO::PARAM_STR);
         $stmt->bindParam(":correo", $datosAlumno["correo"], PDO::PARAM_STR);
         $stmt->bindParam(":telefono", $datosAlumno["telefono"], PDO::PARAM_STR);
-        $stmt->bindParam(":foto", $datosAlumno["foto"], PDO::PARAM_STR);
 
         //Se ejecuta dicha insercion y se notifica al controlador para que este le notifique a las vistas necesarias
         if($stmt->execute()){

@@ -65,28 +65,13 @@ class ControladorAnonimo
     public function guardarDatosAlumno(){
         
         //Datos recibidos de la vista, necesarios para identificar al usuario
+        $nombreResponsable = $_POST['nombreResponsable'];
         $matricula = $_POST['matricula'];
         $nombre = $_POST['nombre'];
         $carrera = $_POST['carrera'];
         $situacion = $_POST['situacion'];
         $correo = $_POST['correo'];
         $telefono = $_POST['telefono'];
-        
-        //Para saber el nombre de la foto se manda llamar esta funcion
-        $nombreArchivo = basename($_FILES['foto']['name']);
-
-        if($nombreArchivo == "" ){
-            $nombreFoto = 'user';
-            $extension = 'png';
-        }else{
-            //Se concatena al nombre la carpeta en donde se guardaran todas las fotos cargadas por los usuarios
-            $directorio = 'fotos/' . $nombreArchivo;
-
-            $nombreFoto = $matricula;
-
-            //Para hacer algunas validaciones y el usuario por ejemplo no pase como foto una archivo pdf se extrae la extencion de la foto
-            $extension = pathinfo($directorio , PATHINFO_EXTENSION);            
-        }
         
         //Todos los datos obtenidos del formulario son guardados en un objeto para luego ser pasados al modelo en donde serna almacenados en su respectiva tabla
         $datosAlumno = array('matricula' => $matricula,
@@ -95,19 +80,10 @@ class ControladorAnonimo
                             'situacion' => $situacion,
                             'correo' => $correo,
                             'telefono' => $telefono,
-                            'foto' => $nombreFoto.'.'.$extension ); //El nombre de la foto de cada uusario sera el nombre de su matricula, para de esta forma llevar un control y que las fotos no se repiten y se sobreescriban
+                            'nombreResponsable' => $nombreResponsable );
 
 
-        if($nombreArchivo != ""){
-            //Aqui es donde se hace la validacion de el archivo sea una foto con extensiones de imagenes frecuentes y no un formato .docs o un pdf por ejemplo
-            if($extension != 'png' && $extension != 'jpg' && $extension != 'PNG' && $extension != 'JPG'){
-                echo '<script> alert("Error al subir el archivo intenta con otro"); </script>';
-            }else{
-                //Una vez que se ha cargado la imagen a los archivos temporales de php, esta funcion la mueve de ahi y la coloca en la direccion donde se guardaran las fotos ya con el nombre presonalizado por cada usuario, que es su matricula
-                move_uploaded_file($_FILES['foto']['tmp_name'], 'fotos/'.$matricula . '.' . $extension);
-            }
-        }
-        //Despues de que se ha guardado la imagen en la carpeta, se manda llamar la funcion del modelo en la cual se pasan el objeto con los datos del formulario para ser guardado
+
         $respuesta = Datos::inscribirAlumno($datosAlumno, "alumnos");
 
         //Se recibe la respuesta del metodo y si esta es exitosa se manda un mensaje de notificacion al cliente y se reenvia al usuario a la lista de todos los usuarios para que vea la insercion del nuevo alumno.

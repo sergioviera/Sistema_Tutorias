@@ -47,69 +47,67 @@ $datosCarreras = $controlador -> obtenerDatosCarreras();
         <?php } ?>
 
         <img class="center-block img-circle" src="Public/img/logo.png" width="150px" height="150px">
-        <p class="login-box-msg " ><b><h3 align="center">Registrarse como Tutor</h3></b></p>
+        <p class="login-box-msg " ><b><h3 align="center">Necesito un Tutor!</h3></b></p>
         <div class="box box-primary">
 
             <div class="box-header with-border">
-                <h3 class="box-title">Por favor, ingrese sus datos para postularse como tutor. En breve nos comunicaremos para informarle sobre los pasos a seguir.</h3>
+                <h3 class="box-title">Por favor, ingres&aacute; tus datos para que nos comuniquemos contigo.</h3>
             </div>
 
             <!-- /.box-header -->
             <!-- form start -->
-            <form method="POST" enctype="multipart/form-data">
-                
+            <form method="POST">
                 <div class="box-body">
 
-                <div class="form-group">
-                    <label for="matricula">DNI</label>
-                    <input type="number" class="form-control" name="matricula" placeholder="Ingrese el DNI">
-                </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre de la persona responsable:</label>
+                        <input type="text" class="form-control" name="nombreResponsable" placeholder="Nombre completo de la persona a cargo del alumno">
+                    </div>
 
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" placeholder="Nombre completo del alumno">
-                </div>
+                    <div class="form-group">
+                        <label for="matricula">DNI del estudiante:</label>
+                        <input type="number" class="form-control" name="matricula" placeholder="Ingrese el DNI">
+                    </div>
 
-                <div class="form-group">    
-                    <label for="carrera">Colegio</label>
-                    <select class="form-control" name="carrera">
-                        <?php
+                    <div class="form-group">
+                        <label for="nombre">Nombre del estudiante:</label>
+                        <input type="text" class="form-control" name="nombre" placeholder="Nombre completo del alumno">
+                    </div>
 
-                            for($i = 0; $i < count($datosCarreras); $i++ ){
-                                echo '<option value="'.$datosCarreras[$i]['carrera_id'].'"> '. $datosCarreras[$i]['nombre'] .' </option>';
-                            }
-                        
-                        ?>
-                    </select>
-                </div>
+                    <div class="form-group">    
+                        <label for="carrera">Colegio:</label>
+                        <select class="form-control" name="carrera">
+                            <?php
 
-                <div class="form-group">
-                    <label for="situacion">Grado</label>
-                    <select class="form-control" name="situacion">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                    </select>
-                </div>
+                                for($i = 0; $i < count($datosCarreras); $i++ ){
+                                    echo '<option value="'.$datosCarreras[$i]['carrera_id'].'"> '. $datosCarreras[$i]['nombre'] .' </option>';
+                                }
+                            
+                            ?>
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label for="correo">Correo</label>
-                    <input type="text" class="form-control" name="correo" placeholder="alguien@ejemplo.com">
-                </div>
+                    <div class="form-group">
+                        <label for="situacion">Grado:</label>
+                        <select class="form-control" name="situacion">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label for="telefono">Tel&eacute;fono</label>
-                    <input type="text" class="form-control" name="telefono" placeholder="Ingrese el telefono con prefijo">
-                </div>
+                    <div class="form-group">
+                        <label for="correo">Correo Electr&oacute;nico:</label>
+                        <input type="text" class="form-control" name="correo" placeholder="alguien@ejemplo.com">
+                    </div>
 
-                <!--Campo que subre la fotografia al servidor, lo coloca en una carpeta temporal desde donde se toma y se almacena en una carpeta especificada, para poder subir la imagen en el formulario se debe cambiar el encabezado a tipo  enctype="multipart/form-data" -->
-                <div class="form-group">
-                    <label for="foto">Foto</label> <br>
-                    <input type="file" class="form-control input-lg" name="foto"  />
-                </div>
+                    <div class="form-group">
+                        <label for="telefono">Tel&eacute;fono:</label>
+                        <input type="text" class="form-control" name="telefono" placeholder="Ingrese el telefono con prefijo">
+                    </div>
 
                 </div>
                 <!-- /.box-body -->
