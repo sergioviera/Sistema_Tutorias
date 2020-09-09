@@ -24,53 +24,47 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-box-body">
+            <!-- Alerta al usuario -->
+            <?php if(isset($_GET['msg'])){ ?>
+                <div id="msg" class="alert alert-danger" role="alert"><?php echo $_GET['msg']?></div><script type="text/javascript">window.onload = function() {$("#msg").delay(4000).slideUp(200, function() {$(this).alert('close');});}</script>
+            <?php } ?>
 
-<div class="login-box">
-  
-    <div class="login-box-body">
-        <!-- Alerta al usuario -->
-        <?php if(isset($_GET['msg'])){ ?>
-            <div id="msg" class="alert alert-danger" role="alert"><?php echo $_GET['msg']?></div><script type="text/javascript">window.onload = function() {$("#msg").delay(4000).slideUp(200, function() {$(this).alert('close');});}</script>
-        <?php } ?>
-
-        <img class="center-block img-circle" src="Public/img/logo.png" width="150px" height="150px">
-        <p class="login-box-msg " ><b><h3 align="center">Sistema de Tutorias</h3></b></p>
-        <!--<p class="login-box-msg"><b>INICIO DE SESIÓN<b></p>-->
-        <div class="row">
-            <div class="col-md-6">
-                <a href="inscripcion-tutor.php" class="btn btn-success">Quiero ser Tutor!</a>
-            </div>
-            <div class="col-md-6">
-                <a href="inscripcion-alumno.php" class="btn btn-warning">Necesito un Tutor!</a>
-            </div>
-        </div>
-        <br/>
-        <form  method="post">
-
-            <div class="form-group has-feedback">
-                <input name="correo" type="email" class="form-control" placeholder="Correo">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-            </div>
-            
-            <div class="form-group has-feedback">
-                <input name= "contrasena" type="password" class="form-control" placeholder="Contraseña">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-
+            <img class="center-block img-circle" src="Public/img/logo.png" width="150px" height="150px">
+            <p class="login-box-msg " ><b><h3 align="center">Sistema de Tutorias</h3></b></p>
+            <!--<p class="login-box-msg"><b>INICIO DE SESIÓN<b></p>-->
             <div class="row">
-                <!-- /.col -->
-                <div class="col-xs-12">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+                <div class="col-md-6">
+                    <a href="inscripcion-tutor.php" class="btn btn-success">Quiero ser Tutor!</a>
                 </div>
-                <!-- /.col -->
+                <div class="col-md-6">
+                    <a href="inscripcion-alumno.php" class="btn btn-warning">Necesito un Tutor!</a>
+                </div>
             </div>
-        </form>
+            <br/>
+            <form  method="post">
+                <div class="form-group has-feedback">
+                    <input name="correo" type="email" class="form-control" placeholder="Correo">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                
+                <div class="form-group has-feedback">
+                    <input name= "contrasena" type="password" class="form-control" placeholder="Contraseña">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
 
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-xs-12">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+        <!-- /.login-box-body -->
     </div>
-    <!-- /.login-box-body -->
-
-</div>
-
 
     <!-- jQuery 3 -->
     <script src="Public/bower_components/jquery/dist/jquery.min.js"></script>
