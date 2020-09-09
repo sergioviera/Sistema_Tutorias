@@ -19,14 +19,22 @@ $contrasena = "";
 for($i=0; $i < count($datosTutores); $i++ ){
     if($datosTutores[$i]['numero_empleado'] == $tutorAEditar ){
 
-        $foto = $datosTutores[$i]['foto'];
         $numero_empleado = $datosTutores[$i]['numero_empleado'];
         $nombre = $datosTutores[$i]['nombre'];
-        $carrera = $datosTutores[$i]['carrera'];
+        $dni = $datosTutores[$i]['dni'];
         $correo = $datosTutores[$i]['correo'];
-        $contrasena = $datosTutores[$i]['contrasena'];
         $telefono = $datosTutores[$i]['telefono'];
-        
+        $carrera = $datosTutores[$i]['carrera'];
+        $nivel = $datosTutores[$i]['nivel'];
+        $promAplazo = $datosTutores[$i]['promAplazo'];
+        $regularizadas = $datosTutores[$i]['regularizadas'];
+        $aprobadas = $datosTutores[$i]['aprobadas'];
+        $anioInicio = $datosTutores[$i]['anioInicio'];
+        $comentarios = $datosTutores[$i]['comentarios'];
+        $fechaInscripcion = $datosTutores[$i]['fecha_inscripcion'];
+        $foto = $datosTutores[$i]['foto'];
+
+        //$contrasena = $datosTutores[$i]['contrasena'];
     }
 }
 
@@ -78,36 +86,72 @@ for($i=0; $i < count($datosTutores); $i++ ){
                             <input type="text" class="form-control" name="nombre" placeholder="Nombre completo del tutor" value="<?= $nombre ?>">
                         </div>
 
+                        <div class="form-group">
+                            <label for="nombre">DNI: </label>
+                            <input type="text" class="form-control" name="dni" value="<?= $dni ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre">Correo Electr&oacute;nico: </label>
+                            <input type="text" class="form-control" name="correo" value="<?= $correo ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre">Tel&eacute;fono: </label>
+                            <input type="text" class="form-control" name="telefono" value="<?= $telefono ?>">
+                        </div>
+
                         <div class="form-group">    
                             <label for="carrera">Carrera: </label>
                             <select class="form-control" name="carrera">
-                                <option <?php echo ($carrera == "Ingeniería Eléctrica")?'selected="selected"':'' ?>>Ingeniería Eléctrica</option>
-                                <option <?php echo ($carrera == "Ingeniería Mecánica")?'selected="selected"':'' ?>>Ingeniería Mecánica</option>
-                                <option <?php echo ($carrera == "Ingeniería Química")?'selected="selected"':'' ?>>Ingeniería Química</option>
-                                <option <?php echo ($carrera == "Ingeniería en Sistemas")?'selected="selected"':'' ?>>Ingeniería en Sistemas</option>
+                                <option <?php echo ($carrera == "UTN-FRD - Ingeniería Eléctrica")?'selected="selected"':'' ?>>UTN-FRD - Ingeniería Eléctrica</option>
+                                <option <?php echo ($carrera == "UTN-FRD - Ingeniería Mecánica")?'selected="selected"':'' ?>>UTN-FRD - Ingeniería Mecánica</option>
+                                <option <?php echo ($carrera == "UTN-FRD - Ingeniería Química")?'selected="selected"':'' ?>>UTN-FRD - Ingeniería Química</option>
+                                <option <?php echo ($carrera == "UTN-FRD - Ingeniería en Sistemas")?'selected="selected"':'' ?>>UTN-FRD - Ingeniería en Sistemas</option>
+                                <option <?php echo ($carrera == "Otra Institución/Carrera")?'selected="selected"':'' ?>>Otra Institución/Carrera</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="correo">Correo: </label>
-                            <input type="email" class="form-control" name="correo" placeholder="Correo del tutor" value="<?= $correo ?>">
+                            <label for="nombre">Nivel: </label>
+                            <input type="text" class="form-control" name="nivel" value="<?= $nivel ?>">
                         </div>
 
                         <div class="form-group">
-                            <label for="telefono">Tel&eacute;fono: </label>
-                            <input type="text" class="form-control" name="telefono" placeholder="Telefono del tutor" value="<?= $telefono ?>">
+                            <label for="nombre">Promedio con Aplazos: </label>
+                            <input type="text" class="form-control" name="promAplazo" value="<?= $promAplazo ?>">
                         </div>
 
                         <div class="form-group">
-                            <label for="contrasena">Contrasena: </label>
-                            <input type="password" class="form-control" name="contrasena" placeholder="Contrasena para ingreso de tutor" value="<?= $contrasena ?>">
+                            <label for="nombre">Cantidad de materias regularizadas: </label>
+                            <input type="text" class="form-control" name="regularizadas" value="<?= $regularizadas ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre">Cantidad de materias aprobadas: </label>
+                            <input type="text" class="form-control" name="aprobadas" value="<?= $aprobadas ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre">A&ntilde;o de inicio de la carrera: </label>
+                            <input type="text" class="form-control" name="anioInicio" value="<?= $anioInicio ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre">Comentarios: </label>
+                            <input type="text" class="form-control" name="comentarios" value="<?= $comentarios ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre">Fecha de Inscripci&oacute;n: </label>
+                            <input type="text" class="form-control" name="fechaInscripcion" value="<?= $fechaInscripcion ?>">
                         </div>
 
                     </div>
                     <!-- /.box-body -->
 
                     <div class="box-footer">
-                    <center> <input type="submit" class="btn btn-primary input-lg" value="Editar Datos" /> </center>
+                    <center> <input type="submit" class="btn btn-primary input-lg" value="Editar Datos" disabled /> </center>
                     </div>
                     
                 </form>

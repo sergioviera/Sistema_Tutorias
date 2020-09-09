@@ -104,8 +104,7 @@ $controlador = new ControladorAnonimo();
                             <option>UTN-FRD - Ingeniería Mecánica</option>
                             <option>UTN-FRD - Ingeniería Química</option>
                             <option>UTN-FRD - Ingeniería en Sistemas</option>
-                            <option>Otra Institución/Carrera</option>}
-                            option
+                            <option>Otra Institución/Carrera</option>
                         </select>
                     </div>
 
@@ -149,6 +148,7 @@ $controlador = new ControladorAnonimo();
                     <div class="form-group">
                         <label for="foto">Foto:</label> <br>
                         <input type="file" class="form-control input-lg" name="foto"   required />
+                        <small class="form-text text-muted">Por favor, sub&iacute; una foto de perfil.</small>
                     </div>
 
                 </div>
