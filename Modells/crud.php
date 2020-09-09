@@ -215,7 +215,7 @@ class Datos extends Conexion{
     //Igualita a la funcion para traer carreras solo que esta trae los tutores
     public function traerDatosTutores($tabla){
 
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY fecha_inscripcion DESC");
 
         $stmt->execute();
 
