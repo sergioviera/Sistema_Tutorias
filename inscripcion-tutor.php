@@ -74,27 +74,32 @@ $controlador = new ControladorAnonimo();
 
                     <div class="form-group">
                         <label for="numero">N&uacute;mero de legajo: </label>
-                        <input type="text" class="form-control" name="numero" placeholder="Numero de legajo" required>
+                        <input type="text" class="form-control required" name="numero" placeholder="Numero de legajo">
+                        <span class="help-block hidden">Debe ingresar este valor</span>
                     </div>
 
                     <div class="form-group">
                         <label for="nombre">Nombre Completo: </label>
-                        <input type="text" class="form-control" name="nombre" placeholder="Nombre completo" required>
+                        <input type="text" class="form-control required" name="nombre" placeholder="Nombre completo">
+                        <span class="help-block hidden">Debe ingresar este valor</span>
                     </div>
 
                     <div class="form-group">
                         <label for="numero">DNI: </label>
-                        <input type="text" class="form-control" name="dni" placeholder="DNI" required>
+                        <input type="text" class="form-control required" name="dni" placeholder="DNI">
+                        <span class="help-block hidden">Debe ingresar este valor</span>
                     </div>
 
                     <div class="form-group">
                         <label for="correo">Correo electrónico: </label>
-                        <input type="email" class="form-control" name="correo" placeholder="Correo electrónico" required>
+                        <input type="email" class="form-control required" name="correo" placeholder="Correo electrónico">
+                        <span class="help-block hidden">Debe ingresar este valor</span>
                     </div>
 
                     <div class="form-group">
                         <label for="telefono">Tel&eacute;fono: </label>
-                        <input type="text" class="form-control" name="telefono" placeholder="Teléfono" required>
+                        <input type="text" class="form-control required" id="telefono" name="telefono" placeholder="Teléfono">
+                        <span class="help-block hidden">Debe ingresar este valor</span>
                     </div>
 
                     <div class="form-group">
@@ -121,22 +126,26 @@ $controlador = new ControladorAnonimo();
 
                     <div class="form-group">
                         <label for="promAplazo">Promedio con aplazos:</label>
-                        <input type="text" class="form-control" name="promAplazo" placeholder="Promedio con aplazos" required>
+                        <input type="text" class="form-control required" name="promAplazo" placeholder="Promedio con aplazos">
+                        <span class="help-block hidden">Debe ingresar este valor</span>
                     </div>
 
                     <div class="form-group">
                         <label for="regularizadas">Materias Regularizadas:</label>
-                        <input type="text" class="form-control" name="regularizadas" placeholder="Materias Regularizadas" required>
+                        <input type="text" class="form-control required" name="regularizadas" placeholder="Materias Regularizadas">
+                        <span class="help-block hidden">Debe ingresar este valor</span>
                     </div>
 
                     <div class="form-group">
                         <label for="aprobadas">Materias Aprobadas:</label>
-                        <input type="text" class="form-control" name="aprobadas" placeholder="Materias Aprobadas" required>
+                        <input type="text" class="form-control required" name="aprobadas" placeholder="Materias Aprobadas">
+                        <span class="help-block hidden">Debe ingresar este valor</span>
                     </div>
 
                     <div class="form-group">
                         <label for="anioInicio">A&ntilde;o de inicio:</label>
-                        <input type="text" class="form-control" name="anioInicio" placeholder="Año de inicio de la carrera" required>
+                        <input type="text" class="form-control required" name="anioInicio" placeholder="Año de inicio de la carrera">
+                        <span class="help-block hidden">Debe ingresar este valor</span>
                     </div>
 
                     <div class="form-group">
@@ -146,9 +155,8 @@ $controlador = new ControladorAnonimo();
 
                     <!--Campo que subre la fotografia al servidor, lo coloca en una carpeta temporal desde donde se toma y se almacena en una carpeta especificada, para poder subir la imagen en el formulario se debe cambiar el encabezado a tipo  enctype="multipart/form-data" -->
                     <div class="form-group">
-                        <label for="foto">Foto:</label> <br>
-                        <input type="file" class="form-control input-lg" name="foto"   required />
-                        <small class="form-text text-muted">Por favor, sub&iacute; una foto de perfil.</small>
+                        <label for="foto">Foto de perfil:</label> <br>
+                        <input type="file" class="form-control input-lg" name="foto"/>
                     </div>
 
                 </div>
@@ -184,6 +192,25 @@ $controlador = new ControladorAnonimo();
                 radioClass: 'iradio_square-blue',
                 increaseArea: '20%' /* optional */
             });
+
+            $(".required").change(function(){
+                $(this).parent().removeClass('has-error');
+                $(this).next().addClass('hidden');
+            })
+
+            $("form").submit(function( event ) {
+                $(".required").parent().removeClass('has-error');
+                $(".required").next().addClass('hidden');
+                $(".required").each(function() {
+                    if($(this).val()==''){
+                        event.preventDefault();
+                        $(this).focus();
+                        $(this).parent().addClass('has-error');
+                        $(this).next().removeClass('hidden');
+                    }
+                });
+            });
+
         });
     </script>
 
